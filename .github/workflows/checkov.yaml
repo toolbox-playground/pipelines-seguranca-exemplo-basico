@@ -5,12 +5,12 @@ on:
     branches:
       - main
     paths:
-      - 'checkov/**'
+      - 'checkov/tf/**'
   pull_request:
     branches:
       - main
     paths:
-      - 'checkov/**'
+      - 'checkov/tf/**'
   workflow_dispatch: # Evento que aciona o fluxo de trabalho manualmente
     inputs: # Define os inputs do fluxo de trabalho
       name: # Define o input "name"
@@ -29,10 +29,4 @@ jobs:
       
       - name: Run Checkov
         run: |
-          checkov -d ./checkov --quiet --output json --output-file checkov-report.json
-      
-      - name: Upload Checkov Report
-        uses: actions/upload-artifact@v2
-        with:
-          name: checkov-report
-          path: ./checkov/checkov-report.json
+          checkov -d ./checkov/tf
