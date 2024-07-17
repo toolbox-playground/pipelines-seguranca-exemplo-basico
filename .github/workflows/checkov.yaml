@@ -29,5 +29,6 @@ jobs:
       
       - name: Run Checkov
         run: |
+          ls -la
           cd checkov
           checkov -d /tf
