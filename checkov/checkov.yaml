@@ -29,4 +29,5 @@ jobs:
       
       - name: Run Checkov
         run: |
-          checkov -d ./checkov/tf
+          cd checkov
+          checkov -d /tf
