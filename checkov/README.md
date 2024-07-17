@@ -56,7 +56,7 @@ Para utilizar o Checkov com venv e instalar as dependências a partir de um arqu
     checkov -d . --output json 
     ```
 
-    O Checkov analisará o diretório atual e fornecerá relatórios sobre possíveis problemas de segurança em seus arquivos de configuração.
+    O Checkov analisará o diretório atual e fornecerá relatórios sobre possíveis problemas de segurança em seus arquivos de configuração. As políticas que o Checkov verifica no Terraform encontram-se no seguinte link: [https://www.checkov.io/5.Policy%20Index/terraform.html](https://www.checkov.io/5.Policy%20Index/terraform.html)
 
 6. Analise os resultados fornecidos pelo Checkov e faça as correções necessárias em seus arquivos de configuração.
 
