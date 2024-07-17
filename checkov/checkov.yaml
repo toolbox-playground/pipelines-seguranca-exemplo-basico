@@ -1,0 +1,30 @@
+name: Terraform Security Check with Checkov
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  checkov-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Install Checkov
+        run: |
+          pip install checkov
+      
+      - name: Run Checkov
+        run: |
+          checkov -d /checkov --quiet --output json --output-file checkov-report.json
+      
+      - name: Upload Checkov Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: checkov-report
+          path: checkov-report.json
