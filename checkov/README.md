@@ -50,7 +50,7 @@ Para utilizar o Checkov com venv e instalar as dependências a partir de um arqu
 
     Isso instalará todas as dependências listadas no arquivo `requirements.txt`, incluindo o Checkov.
 
-5. Navegue até o diretório do seu projeto, [tf](./tf/), e execute o Checkov usando o seguinte comando:
+5. Navegue até o diretório do seu projeto onde se encontram os arquivos do Terraform, no nosso caso é [checkov/tf](./tf/), e execute o Checkov usando o seguinte comando:
 
     ```
     checkov -d . --output json 
