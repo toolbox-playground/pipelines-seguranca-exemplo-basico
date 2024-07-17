@@ -27,7 +27,7 @@ jobs:
       
       - name: Run Checkov
         run: |
-          checkov -d /checkov --quiet --output json --output-file checkov-report.json
+          checkov -d ./checkov --quiet --output json --output-file checkov-report.json
       
       - name: Upload Checkov Report
         uses: actions/upload-artifact@v2
