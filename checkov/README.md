@@ -59,3 +59,51 @@ Para utilizar o Checkov com venv e instalar as dependências a partir de um arqu
 6. Analise os resultados fornecidos pelo Checkov e faça as correções necessárias em seus arquivos de configuração.
 
 Com esses passos, você poderá usar o Checkov com venv e instalar as dependências a partir do arquivo `requirements.txt` para verificar a segurança de seus arquivos de configuração.
+
+### Uso do Checkov no Actions do GitHub
+
+Para utilizar o Checkov no GitHub Actions, siga os passos abaixo:
+
+1. Certifique-se de ter um repositório configurado no GitHub que contenha os arquivos de configuração do Terraform que deseja verificar com o Checkov.
+
+2. Crie um arquivo de fluxo de trabalho (workflow) no seu repositório. Você pode criar um arquivo chamado `.github/workflows/checkov.yml` e adicionar o seguinte conteúdo:
+
+```yaml
+name: Checkov
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    checkov:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+                uses: actions/checkout@v2
+
+            - name: Set up Python
+                uses: actions/setup-python@v2
+                with:
+                    python-version: 3.x
+
+            - name: Install Checkov
+                run: pip install checkov
+
+            - name: Run Checkov
+                run: checkov -d .
+```
+
+Este arquivo de fluxo de trabalho configura o Checkov para ser executado sempre que houver um push ou pull request na branch "main" do seu repositório.
+
+3. Faça um commit e push do arquivo de fluxo de trabalho para o seu repositório.
+
+4. O GitHub Actions executará automaticamente o fluxo de trabalho e o Checkov analisará os arquivos de configuração do Terraform, fornecendo relatórios sobre possíveis problemas de segurança.
+
+Com esses passos, você poderá utilizar o Checkov no GitHub Actions para verificar a segurança dos seus arquivos de configuração do Terraform.
+
