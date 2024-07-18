@@ -29,4 +29,4 @@ jobs:
       
       - name: Run Checkov
         run: |
-          checkov -d checkov/tf --output json
+          checkov -d checkov/tf
