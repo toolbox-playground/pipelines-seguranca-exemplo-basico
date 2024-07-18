@@ -1,8 +1,6 @@
-# Exemplos Básicos de Checkov, Gitleaks, Snyk e Trivy
+# Exemplos Básicos de Checkov
 
 ![Toolbox Playground](../img/toolbox-playground.png)
-
-Este projeto tem como objetivo demonstrar exemplos básicos de configuração de segurança utilizando as ferramentas Checkov, Gitleaks, Snyk e Trivy.
 
 ## Uso
 
