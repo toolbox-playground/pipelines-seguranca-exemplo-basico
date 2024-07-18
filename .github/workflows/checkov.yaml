@@ -1,32 +1,30 @@
 name: Terraform Security Check with Checkov
-
 on:
   push:
     branches:
       - main
     paths:
-      - 'checkov/tf/**'
+      - 'checkov/tf/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'checkov/tf'
   pull_request:
     branches:
       - main
     paths:
-      - 'checkov/tf/**'
-  workflow_dispatch: # Evento que aciona o fluxo de trabalho manualmente
-    inputs: # Define os inputs do fluxo de trabalho
-      name: # Define o input "name"
-        description: 'Trigger manual do Workflow' # Descrição do input
+      - 'checkov/tf/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'checkov/tf'
+  workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
+    inputs:  # Define as entradas para o fluxo de trabalho
+      name:  # Define a entrada "name"
+        description: 'Acionador manual do Fluxo de Trabalho'  # Descrição da entrada
 
 jobs:
   checkov-scan:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Executa o trabalho na versão mais recente do Ubuntu
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      
-      - name: Install Checkov
-        run: |
-          pip install checkov
-      
-      - name: Run Checkov
-        run: |
-          checkov -d checkov/tf
+      - name: Checkout do Repositório  # Passo para fazer checkout do repositório
+        uses: actions/checkout@v2  # Usa a ação 'actions/checkout' para fazer checkout do repositório
+
+      - name: Instalar o Checkov  # Passo para instalar o Checkov
+        run: pip install checkov  # Instala o Checkov usando o pip
+
+      - name: Executar o Checkov  # Passo para executar o Checkov
+        run: checkov -d checkov/tf  # Executa o Checkov no diretório 'checkov/tf'

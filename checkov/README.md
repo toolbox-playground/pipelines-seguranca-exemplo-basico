@@ -69,34 +69,37 @@ Para utilizar o Checkov no GitHub Actions, siga os passos abaixo:
 2. Crie um arquivo de fluxo de trabalho (workflow) no seu repositório. Você pode criar um arquivo chamado `.github/workflows/checkov.yml` e adicionar o seguinte conteúdo:
 
 ```yaml
-name: Checkov
-
+name: Terraform Security Check with Checkov
 on:
-    push:
-        branches:
-            - main
-    pull_request:
-        branches:
-            - main
+  push:
+    branches:
+      - main
+    paths:
+      - 'checkov/tf/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'checkov/tf'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'checkov/tf/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'checkov/tf'
+  workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
+    inputs:  # Define as entradas para o fluxo de trabalho
+      name:  # Define a entrada "name"
+        description: 'Acionador manual do Fluxo de Trabalho'  # Descrição da entrada
 
 jobs:
-    checkov:
-        runs-on: ubuntu-latest
+  checkov-scan:
+    runs-on: ubuntu-latest  # Executa o trabalho na versão mais recente do Ubuntu
 
-        steps:
-            - name: Checkout repository
-                uses: actions/checkout@v2
+    steps:
+      - name: Checkout do Repositório  # Passo para fazer checkout do repositório
+        uses: actions/checkout@v2  # Usa a ação 'actions/checkout' para fazer checkout do repositório
 
-            - name: Set up Python
-                uses: actions/setup-python@v2
-                with:
-                    python-version: 3.x
+      - name: Instalar o Checkov  # Passo para instalar o Checkov
+        run: pip install checkov  # Instala o Checkov usando o pip
 
-            - name: Install Checkov
-                run: pip install checkov
+      - name: Executar o Checkov  # Passo para executar o Checkov
+        run: checkov -d checkov/tf  # Executa o Checkov no diretório 'checkov/tf'
 
-            - name: Run Checkov
-                run: checkov -d .
 ```
 
 Este arquivo de fluxo de trabalho configura o Checkov para ser executado sempre que houver um push ou pull request na branch "main" do seu repositório.
