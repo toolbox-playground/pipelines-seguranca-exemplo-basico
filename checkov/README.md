@@ -14,7 +14,7 @@ Para utilizar o Checkov com venv e instalar as dependências a partir de um arqu
 
 1. Certifique-se de ter o Python instalado em sua máquina. Você pode verificar a versão do Python digitando o seguinte comando no terminal:
 
-    ```
+    ```bash
     python --version
     ```
 
@@ -22,7 +22,7 @@ Para utilizar o Checkov com venv e instalar as dependências a partir de um arqu
 
 2. Crie um ambiente virtual (venv) para isolar as dependências do projeto. No terminal, execute o seguinte comando:
 
-    ```
+    ```bash
     python -m venv myenv
     ```
 
@@ -32,19 +32,19 @@ Para utilizar o Checkov com venv e instalar as dependências a partir de um arqu
 
     - No Windows:
 
-    ```
+    ```bash
     myenv\Scripts\activate
     ```
 
     - No macOS/Linux:
 
-    ```
+    ```bash
     source myenv/bin/activate
     ```
 
 4. Instale as dependências do projeto a partir do arquivo `requirements.txt`. No terminal, execute o seguinte comando:
 
-    ```
+    ```bash
     pip install -r requirements.txt
     ```
 
@@ -52,8 +52,8 @@ Para utilizar o Checkov com venv e instalar as dependências a partir de um arqu
 
 5. Navegue até o diretório do seu projeto onde se encontram os arquivos do Terraform, no nosso caso é [checkov/tf](./tf/), e execute o Checkov usando o seguinte comando:
 
-    ```
-    checkov -d . --output json 
+    ```bash
+    checkov -d .
     ```
 
     O Checkov analisará o diretório atual e fornecerá relatórios sobre possíveis problemas de segurança em seus arquivos de configuração. As políticas que o Checkov verifica no Terraform encontram-se no seguinte link: [https://www.checkov.io/5.Policy%20Index/terraform.html](https://www.checkov.io/5.Policy%20Index/terraform.html)
