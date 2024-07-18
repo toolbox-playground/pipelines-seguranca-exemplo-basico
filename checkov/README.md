@@ -88,7 +88,7 @@ Para utilizar o Checkov no GitHub Actions, siga os passos abaixo:
 
 1. Certifique-se de ter um repositório configurado no GitHub que contenha os arquivos de configuração do Terraform que deseja verificar com o Checkov.
 
-2. Crie um arquivo de fluxo de trabalho (workflow) no seu repositório. Você pode criar um arquivo chamado `.github/workflows/checkov.yml` e adicionar o seguinte conteúdo:
+2. Crie um arquivo de fluxo de trabalho (workflow) no seu repositório. Você pode criar um arquivo chamado [.github/workflows/checkov.yml](../.github/workflows/checkov.yaml) e adicionar o seguinte conteúdo:
 
 ```yaml
 name: Terraform Security Check with Checkov
