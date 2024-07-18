@@ -2,6 +2,8 @@
 
 ![Toolbox Playground](../img/toolbox-playground.png)
 
+O Checkov analisa e fornece relatórios sobre possíveis problemas de segurança em seus arquivos de configuração. As políticas que o Checkov verifica no Terraform encontram-se no seguinte link: [https://www.checkov.io/5.Policy%20Index/terraform.html](https://www.checkov.io/5.Policy%20Index/terraform.html)
+
 Neste exemplo o Checkov irá analisar o arquivo [main.tf](./tf/main.tf) que possui o seguinte conteudo:
 ```
 resource "google_storage_bucket" "my_bucket" {
@@ -76,8 +78,6 @@ Para utilizar o Checkov com venv e instalar as dependências a partir de um arqu
     checkov -d .
     ```
 
-    O Checkov analisará o diretório atual e fornecerá relatórios sobre possíveis problemas de segurança em seus arquivos de configuração. As políticas que o Checkov verifica no Terraform encontram-se no seguinte link: [https://www.checkov.io/5.Policy%20Index/terraform.html](https://www.checkov.io/5.Policy%20Index/terraform.html)
-
 6. Analise os resultados fornecidos pelo Checkov e faça as correções necessárias em seus arquivos de configuração.
 
 Com esses passos, você poderá usar o Checkov com venv e instalar as dependências a partir do arquivo `requirements.txt` para verificar a segurança de seus arquivos de configuração.
@@ -131,4 +131,3 @@ Este arquivo de fluxo de trabalho configura o Checkov para ser executado sempre 
 4. O GitHub Actions executará automaticamente o fluxo de trabalho e o Checkov analisará os arquivos de configuração do Terraform, fornecendo relatórios sobre possíveis problemas de segurança.
 
 Com esses passos, você poderá utilizar o Checkov no GitHub Actions para verificar a segurança dos seus arquivos de configuração do Terraform.
-
