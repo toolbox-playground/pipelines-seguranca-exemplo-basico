@@ -2,6 +2,28 @@
 
 ![Toolbox Playground](../img/toolbox-playground.png)
 
+Neste exemplo o Checkov irá analisar o arquivo [main.tf](./tf/main.tf) que possui o seguinte conteudo:
+```
+resource "google_storage_bucket" "my_bucket" {
+  name     = "my-bucket"
+  location = "us-central1"
+  project  = "toolbox-playground"
+
+  logging {
+    log_bucket = "my-logs-bucket"
+  }
+
+  versioning {
+    enabled = true
+  }
+
+  uniform_bucket_level_access = true
+
+  public_access_prevention = "enforced"
+
+}
+```
+
 ## Uso
 
 Você pode usar o Checkov localmente ou utilizar o workflow do GitHub Actions.
@@ -102,9 +124,9 @@ jobs:
 
 ```
 
-Este arquivo de fluxo de trabalho configura o Checkov para ser executado sempre que houver um push ou pull request na branch "main" do seu repositório.
+Este arquivo de fluxo de trabalho configura o Checkov para ser executado sempre que houver um push ou pull request na branch "main" do seu repositório alterando os arquivos presentes na pasta `checkov/tf`.
 
-3. Faça um commit e push do arquivo de fluxo de trabalho para o seu repositório.
+3. Faça um commit e push do arquivo de fluxo de trabalho para o seu repositório. Você pode também disparar o flxo de trabalho manualmente.
 
 4. O GitHub Actions executará automaticamente o fluxo de trabalho e o Checkov analisará os arquivos de configuração do Terraform, fornecendo relatórios sobre possíveis problemas de segurança.
 
