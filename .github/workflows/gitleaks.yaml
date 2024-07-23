@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Checkout do repositório  # Passo para fazer checkout do repositório
         uses: actions/checkout@v4 # Usa a ação 'actions/checkout' para fazer checkout do repositório
-         with:
+        with:
           fetch-depth: 0
 
       - name: Executar o GitLeaks com Docker  # Passo para executar o GitLeaks com Docker
