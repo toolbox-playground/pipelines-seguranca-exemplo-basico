@@ -56,7 +56,7 @@ git clone https://github.com/toolbox-playground/pipelines-seguranca-exemplo-basi
    ```bash
    cd gitLeaks
    ```
-2. Siga as instruções do [GitLeaks](./getleaks/README.md)
+2. Siga as instruções do [GitLeaks](./gitleaks/README.md)
 
 - Snyk:
 
