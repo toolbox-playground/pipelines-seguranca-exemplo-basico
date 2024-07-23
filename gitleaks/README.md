@@ -76,10 +76,12 @@ jobs:
 
     steps:
       - name: Checkout do repositório  # Passo para fazer checkout do repositório
-        uses: actions/checkout@v2  # Usa a ação 'actions/checkout' para fazer checkout do repositório
+        uses: actions/checkout@v4 # Usa a ação 'actions/checkout' para fazer checkout do repositório
+        with:
+          fetch-depth: 0
 
       - name: Executar o GitLeaks com Docker  # Passo para executar o GitLeaks com Docker
-        run: docker run --rm -v /gitleaks/app:/repo ghcr.io/gitleaks/gitleaks:latest detect --source="/path" -v  # Executa o GitLeaks com Docker no diretório 'gitleaks/app'
+        run: docker run -v ${{ github.workspace }}:/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path" -v # Executa o GitLeaks com Docker no diretório 'gitleaks/app'
 
 ```
 
