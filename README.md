@@ -54,7 +54,7 @@ git clone https://github.com/toolbox-playground/pipelines-seguranca-exemplo-basi
 
 1. Navegue até o diretório GitLeaks.
    ```bash
-   cd gitLeaks
+   cd gitleaks
    ```
 2. Siga as instruções do [GitLeaks](./gitleaks/README.md)
 
