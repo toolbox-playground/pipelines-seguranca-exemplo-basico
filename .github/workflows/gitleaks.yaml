@@ -1,0 +1,27 @@
+name: Security Check with GitLeaks
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'gitleaks/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'gitleaks/app'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'gitleaks/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'gitleaks/app'
+  workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
+    inputs:  # Define entradas para o fluxo de trabalho
+      name:  # Define a entrada "name"
+        description: 'Acionador manual do fluxo de trabalho'  # Descrição da entrada
+
+jobs:
+  gitleaks-scan:
+    runs-on: ubuntu-latest  # Executa o trabalho na versão mais recente do Ubuntu
+
+    steps:
+      - name: Checkout do repositório  # Passo para fazer checkout do repositório
+        uses: actions/checkout@v2  # Usa a ação 'actions/checkout' para fazer checkout do repositório
+
+      - name: Executar o GitLeaks com Docker  # Passo para executar o GitLeaks com Docker
+        run: docker run --rm -v /gitleaks/app:/repo ghcr.io/gitleaks/gitleaks:latest detect --source="/path" -v # Executa o GitLeaks com Docker no diretório 'gitleaks/app'
