@@ -16,13 +16,14 @@ on:
         description: 'Acionador manual do fluxo de trabalho'  # Descrição da entrada
 
 jobs:
-  scan:
-    name: gitleaks
-    runs-on: ubuntu-latest
+  gitleaks-scan:
+    runs-on: ubuntu-latest  # Executa o trabalho na versão mais recente do Ubuntu
+
     steps:
-      - uses: actions/checkout@v4
-        with:
+      - name: Checkout do repositório  # Passo para fazer checkout do repositório
+        uses: actions/checkout@v4 # Usa a ação 'actions/checkout' para fazer checkout do repositório
+         with:
           fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Executar o GitLeaks com Docker  # Passo para executar o GitLeaks com Docker
+        run: docker run -v ${{ github.workspace }}:/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path" -v # Executa o GitLeaks com Docker no diretório 'gitleaks/app'
