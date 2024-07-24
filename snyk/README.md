@@ -22,7 +22,18 @@ Para usar o Snyk, você geralmente segue estes passos:
 
 7. **Monitore e receba alertas**: O Snyk pode ser configurado para monitorar seu projeto e enviar alertas quando novas vulnerabilidades são encontradas nas dependências que você está usando.
 
-## Uso do Snyk
+## Uso do Snyk localmente com Docker
+
+1. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
+
+
+```bash
+docker run --rm \
+-e SNYK_TOKEN=SNYK_TOKEN \
+-v /caminho/para/seu/repositorio:/app \
+snyk/snyk:node snyk test \
+--all-projects=true
+```
 
 [Quick Start](https://docs.snyk.io/getting-started/quickstart)
 
