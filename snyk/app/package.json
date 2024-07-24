@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-gitleaks",
+  "name": "nodejs-snyk",
   "version": "1.0.0",
-  "description": "Nodejs App with GitLeaks",
+  "description": "Nodejs App with Snyk",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
