@@ -6,13 +6,9 @@ O [Snyk](https://snyk.io/pt-BR/) é uma plataforma de segurança para desenvolve
 
  Snyk é uma plataforma de código aberto que ajuda desenvolvedores e equipes de segurança a encontrar e corrigir vulnerabilidades em código-fonte e dependências de software. Ela é utilizada principalmente para monitorar projetos de software em busca de vulnerabilidades de segurança conhecidas nas bibliotecas e pacotes que são usados no desenvolvimento.
 
-Para usar o Snyk, você geralmente segue estes passos:
+Para usar o Snyk, siga estes passos:
 
-1. **Crie uma conta**: Acesse o site do Snyk e crie uma conta gratuita ou empresarial, dependendo das suas necessidades.
-
-2. **Instale o CLI**: O Snyk oferece uma interface de linha de comando (CLI) que você pode instalar no seu ambiente de desenvolvimento. Com ela, você pode testar seus projetos localmente antes de enviá-los para a plataforma Snyk.
-
-3. **Conecte seu projeto**: Após configurar o CLI, você pode conectar seu projeto de software ao Snyk. Isso geralmente envolve apontar o CLI para a raiz do seu projeto e executar um comando para testar as dependências.
+1. **Crie uma conta**: Acesse o site do [Snyk](https://app.snyk.io/signup) e crie uma conta.
 
 4. **Analise o relatório**: Depois que o Snyk analisa seu projeto, ele fornece um relatório detalhado sobre as vulnerabilidades encontradas, incluindo informações sobre a gravidade das vulnerabilidades e recomendações para corrigi-las.
 
