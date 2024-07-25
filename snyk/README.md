@@ -14,6 +14,44 @@ Proteja seus containers: use o [Snyk Container](https://docs.snyk.io/scan-using-
 
 Proteja sua infraestrutura: use o [Snyk Infrastructure as Code (IaC)](https://docs.snyk.io/scan-using-snyk/snyk-iac/scan-your-iac-source-code) para corrigir configurações incorretas em templates do Terraform, CloudFormation, Kubernetes e Azure. Use o IaC+ para corrigir configurações incorretas em contas da Amazon Web Services, assinaturas da Microsoft Azure e projetos do Google Cloud.
 
+## Uso deste Lab
+
+1. Certifique-se de ter o Python instalado em sua máquina. Você pode verificar a versão do Python digitando o seguinte comando no terminal:
+
+    ```bash
+    python --version
+    ```
+
+    Se o Python não estiver instalado, faça o download e a instalação a partir do site oficial do Python: [Link do site oficial do Python](https://www.python.org/)
+
+2. Dentro do diretório [python](./python/), crie um ambiente virtual (venv) para isolar as dependências do projeto. No terminal, execute o seguinte comando:
+
+    ```bash
+    python -m venv myenv
+    ```
+
+    Isso criará um novo diretório chamado `myenv` que conterá o ambiente virtual.
+
+3. Ative o ambiente virtual. No terminal, execute o seguinte comando:
+
+    - No Windows:
+
+    ```bash
+    myenv\Scripts\activate
+    ```
+
+    - No macOS/Linux:
+
+    ```bash
+    source myenv/bin/activate
+    ```
+
+4. Instale as dependências do projeto a partir do arquivo `requirements.txt`. No terminal, execute o seguinte comando:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
 ## Primeiros passos
 
 1. **Crie uma conta**: Acesse o site do [Snyk](https://app.snyk.io/signup) e crie uma conta.
@@ -24,15 +62,13 @@ Proteja sua infraestrutura: use o [Snyk Infrastructure as Code (IaC)](https://do
 
 1. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
 
-2. Selecione a imagem docker a ser utilizada no [Docker Hub](https://hub.docker.com/r/snyk/snyk).
-
-3. Rode o seguinte comando, substituindo o `SEU_SNYK_TOKEN` pelo **Auth Token**, **/caminho/para/seu/repositorio** pelo caminho onde se encontra o seu código e **image_selecionada** pela imagem selecionada no [Docker Hub](https://hub.docker.com/r/snyk/snyk):
+2. Rode o seguinte comando, substituindo o `SEU_SNYK_TOKEN` pelo **Auth Token**, **/caminho/para/seu/repositorio** pelo caminho onde se encontra o seu código.
 
 ```bash
 docker run --rm \
 -e SNYK_TOKEN=SEU_SNYK_TOKEN \
 -v /caminho/para/seu/repositorio:/app \
-snyk/snyk:imagem_selecionada snyk test \
+snyk/snyk:python snyk test \
 --all-projects=true
 ```
 
@@ -65,7 +101,7 @@ snyk test /caminho/para/seu/repositorio --all-projects
 
 ## Uso do Snyk no GitHub Actions
 
-1. Crie um arquivo de fluxo de trabalho (workflow) no seu repositório. Você pode criar um arquivo chamado `.github/workflows/snyk.yml` e adicionar o seguinte conteúdo:
+1. Crie um arquivo de fluxo de trabalho (workflow) no seu repositório. Você pode criar um arquivo chamado [.github/workflows/snyk.yml](../.github/workflows/snyk.yaml) e adicionar o seguinte conteúdo:
 
 ```yaml
 name: Security Check with Snyk
@@ -88,13 +124,15 @@ jobs:
     steps: # Passos a serem executados no trabalho
       - uses: actions/checkout@master # Passo para fazer o checkout do repositório
       - name: Run Snyk to check for vulnerabilities # Executa o Snyk para verificar vulnerabilidades
-        uses: snyk/actions/node@master # Usa a ação do Snyk para Node.js
+        uses: snyk/actions/python@master # Usa a ação do Snyk para Python
         with: # Define os parâmetros da ação
           args: --all-projects # Veirifica todas as dependências do projeto
         env: # Define as variáveis de ambiente
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} # Define o token do Snyk
 
 ```
+
+O exemplo acima é para código em Python. Para saber quais linguagens podem ser usadas no Github Actions acesse [https://github.com/snyk/actions/tree/master](https://github.com/snyk/actions/tree/master)
 
 ### secrets.SNYK_TOKEN
 
@@ -108,6 +146,6 @@ O **secrets.SNYK_TOKEN** é uma variável de ambiente que armazena um token de a
 
 4. Clique em "Add secret" ou "Adicionar segredo" para salvar o token como um segredo do repositório.
 
-## Comando com o Snyk
+## Comandos com o Snyk
 
 Link para os comando do CLI Snyk [https://docs.snyk.io/snyk-cli/cli-commands-and-options-summary](https://docs.snyk.io/snyk-cli/cli-commands-and-options-summary).

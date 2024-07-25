@@ -22,7 +22,7 @@ jobs:
     steps: # Passos a serem executados no trabalho
       - uses: actions/checkout@master # Passo para fazer o checkout do repositório
       - name: Run Snyk to check for vulnerabilities # Executa o Snyk para verificar vulnerabilidades
-        uses: snyk/actions/node@master # Usa a ação do Snyk para Node.js
+        uses: snyk/actions/python@master # Usa a ação do Snyk para Python
         with: # Define os parâmetros da ação
           args: --all-projects # Veirifica todas as dependências do projeto
         env: # Define as variáveis de ambiente
