@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@master # Passo para fazer o checkout do repositório
 
       - name: Install dependencies
-        run: pip install -r requirements # Instala as dependências do projeto
+        run: cd snyk/python && pip install -r requirements.txt # Instala as dependências do projeto
 
       - name: Run Snyk to check for vulnerabilities # Executa o Snyk para verificar vulnerabilidades
         uses: snyk/actions/python@master # Usa a ação do Snyk para Python
