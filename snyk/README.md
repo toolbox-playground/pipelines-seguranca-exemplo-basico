@@ -4,9 +4,17 @@
 
 O [Snyk](https://snyk.io/pt-BR/) é uma plataforma de segurança para desenvolvedores. Integrando-se diretamente a ferramentas de desenvolvimento, fluxos de trabalhos e pipelines de automação, a Snyk possibilita que as equipes encontrem, priorizem e corrijam mais facilmente vulnerabilidades em códigos, dependências, contêineres e infraestrutura como código. Com o suporte do melhor aplicativo do setor e inteligência em segurança, a Snyk coloca a experiência em segurança no kit de ferramentas de todo desenvolvedor.
 
- Snyk é uma plataforma de código aberto que ajuda desenvolvedores e equipes de segurança a encontrar e corrigir vulnerabilidades em código-fonte e dependências de software. Ela é utilizada principalmente para monitorar projetos de software em busca de vulnerabilidades de segurança conhecidas nas bibliotecas e pacotes que são usados no desenvolvimento.
+O Snyk tem suporte para as seguintes linguagens: Bazel, C, C++, Dart , Flutter, Elixir, Go, Java, Kotlin, Javascript, .NET, PHP, Python, Ruby, Swift, Typescript e VB.NET. Para saber mais, acesse este [link](https://docs.snyk.io/supported-languages-package-managers-and-frameworks).
 
- ## Primeiros passos
+## Usos para o Snyk
+
+Proteja seu código: use o [Snyk Open Source](https://docs.snyk.io/scan-using-snyk/snyk-open-source) para corrigir vulnerabilidades em suas dependências de código aberto e o Snyk Code para corrigir vulnerabilidades em seu código-fonte.
+
+Proteja seus containers: use o [Snyk Container](https://docs.snyk.io/scan-using-snyk/snyk-container) para corrigir vulnerabilidades em imagens de containers e aplicações Kubernetes.
+
+Proteja sua infraestrutura: use o [Snyk Infrastructure as Code (IaC)](https://docs.snyk.io/scan-using-snyk/snyk-iac/scan-your-iac-source-code) para corrigir configurações incorretas em templates do Terraform, CloudFormation, Kubernetes e Azure. Use o IaC+ para corrigir configurações incorretas em contas da Amazon Web Services, assinaturas da Microsoft Azure e projetos do Google Cloud.
+
+## Primeiros passos
 
 1. **Crie uma conta**: Acesse o site do [Snyk](https://app.snyk.io/signup) e crie uma conta.
 
@@ -16,27 +24,15 @@ O [Snyk](https://snyk.io/pt-BR/) é uma plataforma de segurança para desenvolve
 
 1. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
 
-2. Verifique se a linguagem de programação que você quer verificar é abrangida pelo Snyk. Conformte este [link](https://docs.snyk.io/supported-languages-package-managers-and-frameworks), são suportadas as seguintes linguagens: Bazel, C, C++, Dart , Flutter, Elixir, Go, Java, Kotlin, Javascript, .NET, PHP, Python, Ruby, Swift, Typescript e VB.NET.
+2. Selecione a imagem docker a ser utilizada no [Docker Hub](https://hub.docker.com/r/snyk/snyk).
 
-3. Selecione a imagem docker a ser utilizada no [Docker Hub](https://hub.docker.com/r/snyk/snyk).
-
-2. Rode o seguinte comando, substituindo o `SEU_SNYK_TOKEN` pelo **Auth Token**, **/caminho/para/seu/repositorio** pelo caminho onde se encontra o seu código e **image_selecionada** pela imagem selecionada no [Docker Hub](https://hub.docker.com/r/snyk/snyk):
+3. Rode o seguinte comando, substituindo o `SEU_SNYK_TOKEN` pelo **Auth Token**, **/caminho/para/seu/repositorio** pelo caminho onde se encontra o seu código e **image_selecionada** pela imagem selecionada no [Docker Hub](https://hub.docker.com/r/snyk/snyk):
 
 ```bash
 docker run --rm \
 -e SNYK_TOKEN=SEU_SNYK_TOKEN \
 -v /caminho/para/seu/repositorio:/app \
 snyk/snyk:imagem_selecionada snyk test \
---all-projects=true
-```
-
-Exemplo usando o **Auth Token** `123456890skahfjsdvdsglfs`, a image_selecionada `Python`, para o repositório `/home/user/repo/python`:
-
-```bash
-docker run --rm \
--e SNYK_TOKEN=123456890skahfjsdvdsglfs \
--v /home/user/repo/python:/app \
-snyk/snyk:python snyk test \
 --all-projects=true
 ```
 

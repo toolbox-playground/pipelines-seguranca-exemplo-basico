@@ -1,0 +1,29 @@
+name: Security Check with Snyk
+on:
+  push:
+    branches:
+      - main  # Aciona o fluxo de trabalho quando houver push na brach main
+    paths:
+      - 'snyk/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/app'
+  pull_request:
+    branches:
+      - main # Aciona o fluxo de trabalho quando houver PR na brach main
+    paths:
+      - 'snyk/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/app'
+  workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
+    inputs:  # Define entradas para o fluxo de trabalho
+      name:  # Define a entrada "name"
+        description: 'Acionador manual do fluxo de trabalho'  # Descrição da entrada
+
+jobs:
+  snyk-scan:
+    name: Snyk Security Check # Nome do trabalho
+    runs-on: ubuntu-latest # Sistema operacional em que o trabalho será executado (no caso, Ubuntu)
+    steps: # Passos a serem executados no trabalho
+      - uses: actions/checkout@master # Passo para fazer o checkout do repositório
+      - name: Run Snyk to check for vulnerabilities # Executa o Snyk para verificar vulnerabilidades
+        uses: snyk/actions/node@master # Usa a ação do Snyk para Node.js
+        with: # Define os parâmetros da ação
+          args: --all-projects # Veirifica todas as dependências do projeto
+        env: # Define as variáveis de ambiente
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} # Define o token do Snyk
