@@ -22,8 +22,8 @@ jobs:
     steps: # Passos a serem executados no trabalho
       - uses: actions/checkout@master # Passo para fazer o checkout do repositório
 
-      - name: Create venv and install dependencies # Cria um ambiente virtual e instala as dependências do projeto
-        run: cd snyk/python && python -m venv myenv && source myenv/bin/activate && pip install -r requirements.txt # Instala as dependências do projeto
+      - name: Docker Build
+        run: docker build -t snyk-python:latest -f snyk/python/Dockerfile snyk/python # Constrói a imagem Docker
 
       - name: Install Snyk CLI # Instala a CLI do Snyk
         run: npm install -g snyk # Instala a CLI do Snyk
@@ -32,4 +32,4 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }} # Autent
       
       - name: Run Snyk test # Executa o teste de segurança com o Snyk
-        run: snyk test --all-projects
+        run: snyk test --docker snyk-python:latest --file=snyk/python/Dockerfile
