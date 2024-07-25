@@ -21,6 +21,10 @@ jobs:
     runs-on: ubuntu-latest # Sistema operacional em que o trabalho será executado (no caso, Ubuntu)
     steps: # Passos a serem executados no trabalho
       - uses: actions/checkout@master # Passo para fazer o checkout do repositório
+
+      - name: Install dependencies
+        run: pip install -r requirements # Instala as dependências do projeto
+
       - name: Run Snyk to check for vulnerabilities # Executa o Snyk para verificar vulnerabilidades
         uses: snyk/actions/python@master # Usa a ação do Snyk para Python
         with: # Define os parâmetros da ação
