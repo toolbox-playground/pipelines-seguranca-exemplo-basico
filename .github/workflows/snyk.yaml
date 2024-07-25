@@ -25,9 +25,11 @@ jobs:
       - name: Create venv and install dependencies # Cria um ambiente virtual e instala as dependências do projeto
         run: cd snyk/python && python -m venv myenv && source myenv/bin/activate && pip install -r requirements.txt # Instala as dependências do projeto
 
-      - name: Run Snyk to check for vulnerabilities # Executa o Snyk para verificar vulnerabilidades
-        uses: snyk/actions/python@master # Usa a ação do Snyk para Python
-        with: # Define os parâmetros da ação
-          args: --all-projects # Veirifica todas as dependências do projeto
-        env: # Define as variáveis de ambiente
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} # Define o token do Snyk
+      - name: Install Snyk CLI # Instala a CLI do Snyk
+        run: npm install -g snyk # Instala a CLI do Snyk
+
+      - name: Authenticate with Snyk # Autentica com o Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }} # Autent
+      
+      - name: Run Snyk test # Executa o teste de segurança com o Snyk
+        run: snyk test --all-projects
