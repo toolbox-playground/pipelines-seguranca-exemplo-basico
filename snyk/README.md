@@ -120,10 +120,13 @@ jobs:
 
       - name: Authenticate with Snyk # Autentica com o Snyk
         run: snyk auth ${{ secrets.SNYK_TOKEN }} # Autenica com o Snyk usando o token
-        continue-on-error: true # Continua mesmo com erro
       
       - name: Run Snyk test # Executa o teste de segurança com o Snyk
-        run: snyk test --docker snyk-python:latest --file=snyk/python/Dockerfile --project-name=snyk-python
+        run: snyk test --docker snyk-python:latest --file=snyk/python/Dockerfile
+        continue-on-error: true # Continua mesmo com erro
+
+      - name: Generate Snyk report # Gera o relatório do Snyk
+        run: snyk monitor --docker snyk-python:latest --file=snyk/python/Dockerfile --project-name=snyk-python
 
 ```
 
