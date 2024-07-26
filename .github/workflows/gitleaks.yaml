@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'gitleaks/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'gitleaks/app'
+      - 'gitleaks/python/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'gitleaks/app'
   pull_request:
     branches:
       - main
