@@ -66,6 +66,14 @@ git clone https://github.com/toolbox-playground/pipelines-seguranca-exemplo-basi
    ```
 2. Siga as instruções do [Snyk](./snyk/README.md)
 
+- TruffleHog:
+
+1. Navegue até o diretório Snyk.
+   ```bash
+   cd trufflehog
+   ```
+2. Siga as instruções do [TruffleHog](./trufflehog/README.md)
+
 - Trivy:
 
 1. Navegue até o diretório Trivy.
