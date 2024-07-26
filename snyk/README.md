@@ -14,6 +14,30 @@ Proteja seus containers: use o [Snyk Container](https://docs.snyk.io/scan-using-
 
 Proteja sua infraestrutura: use o [Snyk Infrastructure as Code (IaC)](https://docs.snyk.io/scan-using-snyk/snyk-iac/scan-your-iac-source-code) para corrigir configurações incorretas em templates do Terraform, CloudFormation, Kubernetes e Azure. Use o IaC+ para corrigir configurações incorretas em contas da Amazon Web Services, assinaturas da Microsoft Azure e projetos do Google Cloud.
 
+## Test e Monitor
+
+### Test
+
+O comando `snyk test` verifica projetos em busca de vulnerabilidades de código aberto e problemas de licença. O comando de teste tenta detectar automaticamente arquivos de manifesto suportados com dependências e testá-los.
+
+### Monitor
+
+O comando `snyk monitor` cria um projeto em sua conta do Snyk para ser continuamente monitorado em busca de vulnerabilidades de código aberto e problemas de licença, enviando os resultados para [snyk.io](https://snyk.io/?_gl=1*9qped6*_gcl_au*MTg3NzEyNTA2MS4xNzIxODM5MzU3*_ga*MTcxMzQxOTgwNy4xNzIxODM5MzU3*_ga_X9SH3KP7B4*MTcyMTk5MzI5Ny43LjEuMTcyMTk5MzQ3Mi42MC4wLjA.).
+
+Use o comando `monitor` antes de integrar um projeto em produção, para fazer uma captura do código a ser monitorado e evitar a introdução de vulnerabilidades em produção. Escolha uma frequência de teste nas configurações se desejar alterar a frequência padrão, que é diária.
+
+Uma verificação de PR também realizará um teste.
+
+Após executar o comando snyk monitor, faça login no site do Snyk e visualize seus projetos para ver o monitoramento.
+
+Se você fizer alterações no seu código, será necessário executar o comando `monitor` novamente.
+
+Para o Snyk Container, consulte a [ajuda](https://docs.snyk.io/snyk-cli/commands/container) do `snyk container`.
+
+O comando `monitor` não é suportado para o Snyk Code.
+
+Para o Snyk Infrastructure as Code, siga as instruções em "Testando regularmente arquivos IaC" no [Snyk CLI para IaC](https://docs.snyk.io/snyk-cli/scan-and-maintain-projects-using-the-cli/snyk-cli-for-iac).
+
 ## Primeiros passos
 
 1. **Crie uma conta**: Acesse o site do [Snyk](https://app.snyk.io/signup) e crie uma conta.
@@ -50,8 +74,14 @@ docker build -t snyk-python:latest -f Dockerfile .
 snyk test --docker snyk-python:latest --file=Dockerfile
 
 ```
+Obs.: Esse comando irá gerar um relatório de falhas encontradas.
 
-5. Após rodar o comando acima, o Snyk irá testar o código.
+5. Para monitorar o código por meio da plataforma Snyk, rode o seguinte comando: 
+
+```bash
+snyk monitor --docker snyk-python:latest --file=Dockerfile
+```
+Obs.: Esse comando irá gerar uma URL para acessar o relatório do Snyk.
 
 ## Uso do Snyk no GitHub Actions
 
