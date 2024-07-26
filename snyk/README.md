@@ -81,7 +81,7 @@ Obs.: Esse comando irá gerar um relatório de falhas encontradas.
 ```bash
 snyk monitor --docker snyk-python:latest --file=Dockerfile --project-name=snyk-python
 ```
-Obs.: Esse comando irá gerar uma URL para acessar o relatório do Snyk.
+Obs.: Esse comando irá gerar um um projeto no Snyk com o seguinte nome **snyk-python**.
 
 ## Uso do Snyk no GitHub Actions
 
