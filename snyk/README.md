@@ -122,7 +122,7 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }} # Autent
       
       - name: Run Snyk test # Executa o teste de segurança com o Snyk
-        run: snyk test --docker snyk-python:latest --file=snyk/python/Dockerfile
+        run: snyk test --docker snyk-python:latest --file=snyk/python/Dockerfile --project-name=snyk-python
 
 ```
 
