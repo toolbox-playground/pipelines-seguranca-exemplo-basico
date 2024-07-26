@@ -119,7 +119,8 @@ jobs:
         run: npm install -g snyk # Instala a CLI do Snyk
 
       - name: Authenticate with Snyk # Autentica com o Snyk
-        run: snyk auth ${{ secrets.SNYK_TOKEN }} # Autent
+        run: snyk auth ${{ secrets.SNYK_TOKEN }} # Autenica com o Snyk usando o token
+        continue-on-error: true # Continua mesmo com erro
       
       - name: Run Snyk test # Executa o teste de segurança com o Snyk
         run: snyk test --docker snyk-python:latest --file=snyk/python/Dockerfile --project-name=snyk-python
