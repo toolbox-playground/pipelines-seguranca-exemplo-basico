@@ -79,7 +79,7 @@ Obs.: Esse comando irá gerar um relatório de falhas encontradas.
 5. Para monitorar o código por meio da plataforma Snyk, rode o seguinte comando: 
 
 ```bash
-snyk monitor --docker snyk-python:latest --file=Dockerfile
+snyk monitor --docker snyk-python:latest --file=Dockerfile --project-name=snyk-python
 ```
 Obs.: Esse comando irá gerar uma URL para acessar o relatório do Snyk.
 

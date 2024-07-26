@@ -33,3 +33,6 @@ jobs:
       
       - name: Run Snyk test # Executa o teste de segurança com o Snyk
         run: snyk test --docker snyk-python:latest --file=snyk/python/Dockerfile
+
+      - name: Generate Snyk report # Gera o relatório do Snyk
+        run: snyk monitor --docker snyk-python:latest --file=snyk/python/Dockerfile --project-name=snyk-python
