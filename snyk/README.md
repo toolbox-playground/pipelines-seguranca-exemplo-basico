@@ -81,7 +81,12 @@ Obs.: Esse comando irá gerar um relatório de falhas encontradas.
 ```bash
 snyk monitor --docker snyk-python:latest --file=Dockerfile --project-name=snyk-python
 ```
-Obs.: Esse comando irá gerar um um projeto no Snyk com o seguinte nome **snyk-python**.
+- Esse comando irá gerar um um projeto no Snyk com o nome **snyk-python**.
+- Quando estiver usando uma [Organização](https://docs.snyk.io/snyk-admin/groups-and-organizations/organizations) diferente, colocar no final do código `--org=sua_org`, conforme o código abaixo:
+
+```bash
+  snyk monitor --docker snyk-python:latest --file=Dockerfile --project-name=snyk-python --org=sua_org
+```
 
 ## Uso do Snyk no GitHub Actions
 
