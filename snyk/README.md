@@ -14,86 +14,40 @@ Proteja seus containers: use o [Snyk Container](https://docs.snyk.io/scan-using-
 
 Proteja sua infraestrutura: use o [Snyk Infrastructure as Code (IaC)](https://docs.snyk.io/scan-using-snyk/snyk-iac/scan-your-iac-source-code) para corrigir configurações incorretas em templates do Terraform, CloudFormation, Kubernetes e Azure. Use o IaC+ para corrigir configurações incorretas em contas da Amazon Web Services, assinaturas da Microsoft Azure e projetos do Google Cloud.
 
-## Uso deste Lab
-
-1. Certifique-se de ter o Python instalado em sua máquina. Você pode verificar a versão do Python digitando o seguinte comando no terminal:
-
-    ```bash
-    python --version
-    ```
-
-    Se o Python não estiver instalado, faça o download e a instalação a partir do site oficial do Python: [Link do site oficial do Python](https://www.python.org/)
-
-2. Dentro do diretório [python](./python/), crie um ambiente virtual (venv) para isolar as dependências do projeto. No terminal, execute o seguinte comando:
-
-    ```bash
-    python -m venv myenv
-    ```
-
-    Isso criará um novo diretório chamado `myenv` que conterá o ambiente virtual.
-
-3. Ative o ambiente virtual. No terminal, execute o seguinte comando:
-
-    - No Windows:
-
-    ```bash
-    myenv\Scripts\activate
-    ```
-
-    - No macOS/Linux:
-
-    ```bash
-    source myenv/bin/activate
-    ```
-
-4. Instale as dependências do projeto a partir do arquivo `requirements.txt`. No terminal, execute o seguinte comando:
-
-    ```bash
-    pip install -r requirements.txt
-    ```
-
 ## Primeiros passos
 
 1. **Crie uma conta**: Acesse o site do [Snyk](https://app.snyk.io/signup) e crie uma conta.
 
 2. **Token**: Após criar a conta, vá até [Account Settings](https://app.snyk.io/account) e copie o **Auth Token** para ser usado abaixo.
 
-## Uso do Snyk com Docker
+3. Certifique-se de ter o Nodejs instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://nodejs.org/pt/download/package-manager/current](https://nodejs.org/pt/download/package-manager/current).
 
-1. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
-
-2. Rode o seguinte comando, substituindo o `SEU_SNYK_TOKEN` pelo **Auth Token**, **/caminho/para/seu/repositorio** pelo caminho onde se encontra o seu código.
-
-```bash
-docker run --rm \
--e SNYK_TOKEN=SEU_SNYK_TOKEN \
--v /caminho/para/seu/repositorio:/app \
-snyk/snyk:python snyk test \
---all-projects=true
-```
-
-4. Após rodar o comando acima, o Snyk irá testar o código.
+4. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
 
 ## Uso do CLI Snyk
 
-1. Certifique-se de ter o Nodejs instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://nodejs.org/pt/download/package-manager/current](https://nodejs.org/pt/download/package-manager/current).
-
-2. Instale o pacote do Snyk com o seguinte comando:
+1. Instale o pacote do Snyk com o seguinte comando:
 
 ```bash
 npm install snyk -g
 ```
 
-3. Após instalado, autentique usando o seu **Auth Token**:
+2. Após instalado, autentique usando o seu **Auth Token**:
 
 ```bash
 snyk auth token
 ```
 
-4. Após logado, rode o comando abaixo para testar o código:
+3. Crie a imagem docker do app python com o seguinte comando:
 
 ```bash
-snyk test /caminho/para/seu/repositorio --all-projects
+docker build -t snyk-python:latest -f Dockerfile .
+```
+
+4. Após o build da imagem, rode o comando abaixo para testar a imagem:
+
+```bash
+snyk test --docker snyk-python:latest --file=Dockerfile
 
 ```
 
@@ -109,9 +63,13 @@ on:
   push:
     branches:
       - main  # Aciona o fluxo de trabalho quando houver push na brach main
+    paths:
+      - 'snyk/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/app'
   pull_request:
     branches:
       - main # Aciona o fluxo de trabalho quando houver PR na brach main
+    paths:
+      - 'snyk/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/app'
   workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
     inputs:  # Define entradas para o fluxo de trabalho
       name:  # Define a entrada "name"
@@ -124,15 +82,17 @@ jobs:
     steps: # Passos a serem executados no trabalho
       - uses: actions/checkout@master # Passo para fazer o checkout do repositório
 
-      - name: Install dependencies
-        run: pip install -r requirements
+      - name: Docker Build
+        run: docker build -t snyk-python:latest -f snyk/python/Dockerfile snyk/python # Constrói a imagem Docker
 
-      - name: Run Snyk to check for vulnerabilities # Executa o Snyk para verificar vulnerabilidades
-        uses: snyk/actions/python@master # Usa a ação do Snyk para Python
-        with: # Define os parâmetros da ação
-          args: --all-projects # Veirifica todas as dependências do projeto
-        env: # Define as variáveis de ambiente
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} # Define o token do Snyk
+      - name: Install Snyk CLI # Instala a CLI do Snyk
+        run: npm install -g snyk # Instala a CLI do Snyk
+
+      - name: Authenticate with Snyk # Autentica com o Snyk
+        run: snyk auth ${{ secrets.SNYK_TOKEN }} # Autent
+      
+      - name: Run Snyk test # Executa o teste de segurança com o Snyk
+        run: snyk test --docker snyk-python:latest --file=snyk/python/Dockerfile
 
 ```
 
