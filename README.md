@@ -16,6 +16,12 @@ Gitleaks é uma ferramenta de segurança que verifica repositórios Git em busca
 
 Snyk é uma ferramenta de segurança de código aberto que ajuda a identificar e corrigir vulnerabilidades em suas dependências de código. Com o Snyk, você pode garantir que suas bibliotecas e pacotes estejam atualizados e livres de vulnerabilidades conhecidas. Neste projeto, você verá exemplos de como utilizar o Snyk para analisar e corrigir vulnerabilidades em suas dependências.
 
+### TruffleHog
+
+TruffleHog é uma ferramenta de segurança que verifica seus repositórios de código em busca de segredos e informações sensíveis. Ele procura por strings de alta entropia, como chaves de API, senhas e tokens de acesso, que podem ter sido acidentalmente commitados em seu sistema de controle de versão.
+
+Ao usar o TruffleHog, você pode identificar e remover proativamente informações sensíveis de sua base de código, reduzindo o risco de violações de dados e acesso não autorizado.
+
 ### Trivy
 
 Trivy é uma ferramenta de segurança de contêineres que verifica imagens de contêiner em busca de vulnerabilidades conhecidas. Com o Trivy, você pode garantir que suas imagens de contêiner estejam seguras e livres de vulnerabilidades conhecidas. Neste projeto, você encontrará exemplos de como utilizar o Trivy para analisar e corrigir vulnerabilidades em suas imagens de contêiner.
