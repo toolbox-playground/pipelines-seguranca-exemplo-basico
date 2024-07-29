@@ -14,30 +14,6 @@ Proteja seus containers: use o [Snyk Container](https://docs.snyk.io/scan-using-
 
 Proteja sua infraestrutura: use o [Snyk Infrastructure as Code (IaC)](https://docs.snyk.io/scan-using-snyk/snyk-iac/scan-your-iac-source-code) para corrigir configurações incorretas em templates do Terraform, CloudFormation, Kubernetes e Azure. Use o IaC+ para corrigir configurações incorretas em contas da Amazon Web Services, assinaturas da Microsoft Azure e projetos do Google Cloud.
 
-## Test e Monitor
-
-### Test
-
-O comando `snyk test` verifica projetos em busca de vulnerabilidades de código aberto e problemas de licença. O comando de teste tenta detectar automaticamente arquivos de manifesto suportados com dependências e testá-los.
-
-### Monitor
-
-O comando `snyk monitor` cria um projeto em sua conta do Snyk para ser continuamente monitorado em busca de vulnerabilidades de código aberto e problemas de licença, enviando os resultados para [snyk.io](https://snyk.io/?_gl=1*9qped6*_gcl_au*MTg3NzEyNTA2MS4xNzIxODM5MzU3*_ga*MTcxMzQxOTgwNy4xNzIxODM5MzU3*_ga_X9SH3KP7B4*MTcyMTk5MzI5Ny43LjEuMTcyMTk5MzQ3Mi42MC4wLjA.).
-
-Use o comando `monitor` antes de integrar um projeto em produção, para fazer uma captura do código a ser monitorado e evitar a introdução de vulnerabilidades em produção. Escolha uma frequência de teste nas configurações se desejar alterar a frequência padrão, que é diária.
-
-Uma verificação de PR também realizará um teste.
-
-Após executar o comando snyk monitor, faça login no site do Snyk e visualize seus projetos para ver o monitoramento.
-
-Se você fizer alterações no seu código, será necessário executar o comando `monitor` novamente.
-
-Para o Snyk Container, consulte a [ajuda](https://docs.snyk.io/snyk-cli/commands/container) do `snyk container`.
-
-O comando `monitor` não é suportado para o Snyk Code.
-
-Para o Snyk Infrastructure as Code, siga as instruções em "Testando regularmente arquivos IaC" no [Snyk CLI para IaC](https://docs.snyk.io/snyk-cli/scan-and-maintain-projects-using-the-cli/snyk-cli-for-iac).
-
 ## Primeiros passos
 
 1. **Crie uma conta**: Acesse o site do [Snyk](https://app.snyk.io/signup) e crie uma conta.
@@ -47,6 +23,38 @@ Para o Snyk Infrastructure as Code, siga as instruções em "Testando regularmen
 3. Certifique-se de ter o Nodejs instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://nodejs.org/pt/download/package-manager/current](https://nodejs.org/pt/download/package-manager/current).
 
 4. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
+
+## Snyk Container
+
+O Snyk Container é uma ferramenta que ajuda a identificar e corrigir vulnerabilidades de segurança em contêineres de software. Ele é projetado para analisar imagens de contêineres e fornecer informações sobre quaisquer vulnerabilidades conhecidas presentes nessas imagens.
+
+Ao usar o Snyk Container, você pode verificar se as imagens de contêineres que você está usando contêm componentes com vulnerabilidades conhecidas. Ele verifica o banco de dados de vulnerabilidades do Snyk para identificar quaisquer problemas de segurança e fornece informações detalhadas sobre as vulnerabilidades encontradas.
+
+Além disso, o Snyk Container também pode ajudar a corrigir essas vulnerabilidades, fornecendo recomendações de patches ou atualizações para os componentes afetados. Isso ajuda a garantir que seus contêineres estejam protegidos contra possíveis ataques e vulnerabilidades conhecidas.
+
+O Snyk Container é uma ferramenta útil para equipes de desenvolvimento e operações que desejam garantir a segurança de seus contêineres de software. Ele pode ser integrado a pipelines de CI/CD para automatizar a verificação de segurança de imagens de contêineres e garantir que apenas imagens seguras sejam implantadas em produção.
+
+Espero que isso tenha esclarecido o que é o Snyk Container e como ele pode ser útil para garantir a segurança de seus contêineres de software. Se você tiver mais alguma dúvida, fique à vontade para perguntar!
+
+## Test e Monitor
+
+### Test
+
+O comando `snyk container test` é usado para testar a segurança de um contêiner Docker em relação a vulnerabilidades conhecidas. O Snyk é uma ferramenta de segurança que verifica se o contêiner possui dependências desatualizadas ou vulneráveis.
+
+Quando você executa o comando `snyk container test`, o Snyk analisa o contêiner Docker especificado e verifica se há vulnerabilidades conhecidas nas imagens e nas dependências do contêiner. Ele também fornece informações detalhadas sobre as vulnerabilidades encontradas, incluindo o nível de gravidade e as recomendações para corrigi-las.
+
+Essa verificação de segurança é importante para garantir que os contêineres Docker utilizados em seus projetos estejam protegidos contra possíveis ataques e vulnerabilidades conhecidas.
+
+### Monitor
+
+O comando `snyk container monitor` captura as camadas de imagem do contêiner e as dependências em um projeto e monitora esse snapshot em busca de vulnerabilidades, enviando os resultados para [snyk.io](snyk.io).
+
+Use o comando `container monitor` antes de integrar seu código em produção, para tirar uma snapshot do código a ser monitorado, a fim de evitar a introdução de vulnerabilidades em produção. Escolha uma frequência de teste em suas configurações se você deseja alterar a frequência padrão, que é diária.
+
+Se você fizer alterações no seu código, será necessário executar o comando `container monitor` novamente.
+
+Para obter mais informações, consulte [Snyk CLI para segurança de contêineres](https://docs.snyk.io/products/snyk-container/snyk-cli-for-container-security).
 
 ## Uso do CLI Snyk
 
@@ -71,7 +79,7 @@ docker build -t snyk-python:latest -f Dockerfile .
 4. Após o build da imagem, rode o comando abaixo para testar a imagem:
 
 ```bash
-snyk test --docker snyk-python:latest --file=Dockerfile
+snyk container test --docker snyk-python:latest --file=Dockerfile
 
 ```
 Obs.: Esse comando irá gerar um relatório de falhas encontradas.
@@ -79,14 +87,16 @@ Obs.: Esse comando irá gerar um relatório de falhas encontradas.
 5. Para monitorar o código por meio da plataforma Snyk, rode o seguinte comando: 
 
 ```bash
-snyk monitor --docker snyk-python:latest --file=Dockerfile --project-name=snyk-python
+snyk container monitor --docker snyk-python:latest --file=Dockerfile --project-name=snyk-python
 ```
 - Esse comando irá gerar um um projeto no Snyk com o nome **snyk-python**.
 - Quando estiver usando uma [Organização](https://docs.snyk.io/snyk-admin/groups-and-organizations/organizations) diferente, colocar no final do código `--org=sua_org`, conforme o código abaixo:
 
 ```bash
-  snyk monitor --docker snyk-python:latest --file=Dockerfile --project-name=snyk-python --org=sua_org
+  snyk container monitor --docker snyk-python:latest --file=Dockerfile --project-name=snyk-python --org=sua_org
 ```
+
+Se você fizer alterações no seu código, será necessário executar o comando de `monitor` novamente.
 
 ## Uso do Snyk no GitHub Actions
 
