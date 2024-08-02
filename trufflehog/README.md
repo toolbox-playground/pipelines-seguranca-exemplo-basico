@@ -1,62 +1,23 @@
-<p align="center">
-  <img alt="GoReleaser Logo" src="https://storage.googleapis.com/trufflehog-static-sources/pixel_pig.png" height="140" />
-  <h2 align="center">TruffleHog</h2>
-  <p align="center">Find leaked credentials.</p>
-</p>
+# Exemplos Básicos de Snyk
 
----
+![Toolbox Playground](../img/toolbox-playground.png)
 
-<div align="center">
+TruffleHog™ é uma ferramenta de verificação de segredos que investiga profundamente seus repositórios de código em busca de segredos, senhas e chaves sensíveis.
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/trufflesecurity/trufflehog/v3)](https://goreportcard.com/report/github.com/trufflesecurity/trufflehog/v3)
-[![License](https://img.shields.io/badge/license-AGPL--3.0-brightgreen)](/LICENSE)
-[![Total Detectors](https://img.shields.io/github/directory-file-count/trufflesecurity/truffleHog/pkg/detectors?label=Total%20Detectors&type=dir)](/pkg/detectors)
+Para obter mais informações sobre o TruffleHog, visite a [página do TruffleHog](https://trufflesecurity.com/trufflehog?gclid=CjwKCAjwouexBhAuEiwAtW_Zx5IW87JNj97Ci7heFnA5ar6-DuNzT2Y5nIl9DuZ-FOUqx0Qg3vb9nxoClcEQAvD_BwE).
 
-</div>
+## Usage
 
----
-
-# :mag_right: _Now Scanning_
-
-<div align="center">
-
-<img src="assets/scanning_logos.svg">
-
-**...and more**
-
-To learn more about about TruffleHog and its features and capabilities, visit our [product page](https://trufflesecurity.com/trufflehog?gclid=CjwKCAjwouexBhAuEiwAtW_Zx5IW87JNj97Ci7heFnA5ar6-DuNzT2Y5nIl9DuZ-FOUqx0Qg3vb9nxoClcEQAvD_BwE).
-
-</div>
-
-# :globe_with_meridians: TruffleHog Enterprise
-
-Are you interested in continuously monitoring **Git, Jira, Slack, Confluence, Microsoft Teams, Sharepoint, and more..** for credentials? We have an enterprise product that can help! Learn more at <https://trufflesecurity.com/trufflehog-enterprise>.
-
-We take the revenue from the enterprise product to fund more awesome open source projects that the whole community can benefit from.
-
-</div>
-
-# :loudspeaker: Join Our Community
-
-Have questions? Feedback? Jump in slack or discord and hang out with us
-
-Join our [Slack Community](https://join.slack.com/t/trufflehog-community/shared_invite/zt-pw2qbi43-Aa86hkiimstfdKH9UCpPzQ)
-
-Join the [Secret Scanning Discord](https://discord.gg/8Hzbrnkr7E)
-
-# :tv: Demo
-
-![GitHub scanning demo](https://storage.googleapis.com/truffle-demos/non-interactive.svg)
 
 ```bash
-docker run --rm -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --org=trufflesecurity
+docker run --rm -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github
 ```
 
-# :floppy_disk: Installation
+## Instalação
 
-Several options available for you:
+Várias opções estão disponíveis para você:
 
-### MacOS users
+### Usuários do MacOS
 
 ```bash
 brew install trufflehog
@@ -64,7 +25,7 @@ brew install trufflehog
 
 ### Docker:
 
-<sub><i>_Ensure Docker engine is running before executing the following commands:_</i></sub>
+<sub><i>_Certifique-se de que o Docker esteja em execução antes de executar os comandos a seguir:_</i></sub>
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;Unix
 
@@ -72,203 +33,235 @@ brew install trufflehog
 docker run --rm -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/trufflesecurity/test_keys
 ```
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;Windows Command Prompt
+#### &nbsp;&nbsp;&nbsp;&nbsp;Prompt de Comando do Windows
 
 ```bash
 docker run --rm -it -v "%cd:/=\%:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/trufflesecurity/test_keys
 ```
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;Windows PowerShell
+#### &nbsp;&nbsp;&nbsp;&nbsp;PowerShell do Windows
 
 ```bash
 docker run --rm -it -v "${PWD}:/pwd" trufflesecurity/trufflehog github --repo https://github.com/trufflesecurity/test_keys
 ```
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;M1 and M2 Mac
+#### &nbsp;&nbsp;&nbsp;&nbsp;M1 e M2 Mac
 
 ```bash
 docker run --platform linux/arm64 --rm -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/trufflesecurity/test_keys
 ```
 
-### Binary releases
+### Versões binárias
 
 ```bash
-Download and unpack from https://github.com/trufflesecurity/trufflehog/releases
+Baixe e descompacte em https://github.com/trufflesecurity/trufflehog/releases
 ```
 
-### Compile from source
+### Compilar a partir do código-fonte
 
 ```bash
 git clone https://github.com/trufflesecurity/trufflehog.git
 cd trufflehog; go install
 ```
 
-### Using installation script
+### Usando script de instalação
 
 ```bash
 curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
 ```
 
-### Using installation script, verify checksum signature (requires cosign to be installed)
+### Usando script de instalação, verifique a assinatura do checksum (requer a instalação do cosign)
 
 ```bash
 curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -v -b /usr/local/bin
 ```
 
-### Using installation script to install a specific version
+### Usando script de instalação para instalar uma versão específica
 
 ```bash
-curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin <ReleaseTag like v3.56.0>
+curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin <ReleaseTag como v3.56.0>
 ```
 
-# :closed_lock_with_key: Verifying the artifacts
+# :closed_lock_with_key: Verificando os artefatos
 
-Checksums are applied to all artifacts, and the resulting checksum file is signed using cosign.
+Checksums são aplicados a todos os artefatos, e o arquivo de checksum resultante é assinado usando o cosign.
 
-You need the following tool to verify signature:
+Você precisa da seguinte ferramenta para verificar a assinatura:
 
 - [Cosign](https://docs.sigstore.dev/cosign/installation/)
 
-Verification steps are as follow:
+As etapas de verificação são as seguintes:
 
-1. Download the artifact files you want, and the following files from the [releases](https://github.com/trufflesecurity/trufflehog/releases) page.
+1. Baixe os arquivos de artefato que você deseja e os seguintes arquivos da página de [releases](https://github.com/trufflesecurity/trufflehog/releases).
 
-   - trufflehog\_{version}\_checksums.txt
-   - trufflehog\_{version}\_checksums.txt.pem
-   - trufflehog\_{version}\_checksums.txt.sig
+  - trufflehog\_{versão}\_checksums.txt
+  - trufflehog\_{versão}\_checksums.txt.pem
+  - trufflehog\_{versão}\_checksums.txt.sig
 
-2. Verify the signature:
+2. Verifique a assinatura:
 
-   ```shell
-   cosign verify-blob <path to trufflehog_{version}_checksums.txt> \
-   --certificate <path to trufflehog_{version}_checksums.txt.pem> \
-   --signature <path to trufflehog_{version}_checksums.txt.sig> \
-   --certificate-identity-regexp 'https://github\.com/trufflesecurity/trufflehog/\.github/workflows/.+' \
-   --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
-   ```
+  ```shell
+  cosign verify-blob <caminho para trufflehog_{versão}_checksums.txt> \
+  --certificate <caminho para trufflehog_{versão}_checksums.txt.pem> \
+  --signature <caminho para trufflehog_{versão}_checksums.txt.sig> \
+  --certificate-identity-regexp 'https://github\.com/trufflesecurity/trufflehog/\.github/workflows/.+' \
+  --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
+  ```
 
-3. Once the signature is confirmed as valid, you can proceed to validate that the SHA256 sums align with the downloaded artifact:
+3. Uma vez que a assinatura for confirmada como válida, você pode prosseguir para validar que as somas SHA256 estão alinhadas com o artefato baixado:
 
-   ```shell
-   sha256sum --ignore-missing -c trufflehog_{version}_checksums.txt
-   ```
+  ```shell
+  sha256sum --ignore-missing -c trufflehog_{versão}_checksums.txt
+  ```
 
-Replace `{version}` with the downloaded files version
+Substitua `{versão}` pela versão dos arquivos baixados.
 
-Alternatively, if you are using installation script, pass `-v` option to perform signature verification.
-This required Cosign binary to be installed prior to running installation script.
+Alternativamente, se você estiver usando o script de instalação, passe a opção `-v` para realizar a verificação da assinatura. Isso requer que o binário Cosign esteja instalado antes de executar o script de instalação.
 
-# :rocket: Quick Start
+# :rocket: Início Rápido
 
-## 1: Scan a repo for only verified secrets
+## 1: Verificar um repositório apenas para segredos verificados
 
-Command:
+Comando:
 
 ```bash
 trufflehog git https://github.com/trufflesecurity/test_keys --only-verified
 ```
 
+<<<<<<< HEAD
 ## 2: Scan a GitHub Org for only verified secrets
+=======
+Saída esperada:
+
+```
+🐷🔑🐷  TruffleHog. Unearth your secrets. 🐷🔑🐷
+
+Found verified result 🐷🔑
+Detector Type: AWS
+Decoder Type: PLAIN
+Raw result: AKIAYVP4CIPPERUVIFXG
+Line: 4
+Commit: fbc14303ffbf8fb1c2c1914e8dda7d0121633aca
+File: keys
+Email: counter <counter@counters-MacBook-Air.local>
+Repository: https://github.com/trufflesecurity/test_keys
+Timestamp: 2022-06-16 10:17:40 -0700 PDT
+...
+```
+
+## 2: Verificar uma organização do GitHub apenas para segredos verificados
+>>>>>>> 1a996b2 (readme)
 
 ```bash
 trufflehog github --org=trufflesecurity --only-verified
 ```
 
-## 3: Scan a GitHub Repo for only verified keys and get JSON output
+## 3: Verificar um repositório do GitHub apenas para chaves verificadas e obter saída JSON
 
-Command:
+Comando:
 
 ```bash
 trufflehog git https://github.com/trufflesecurity/test_keys --only-verified --json
 ```
 
+<<<<<<< HEAD
 ## 4: Scan a GitHub Repo + its Issues and Pull Requests
+=======
+Saída esperada:
+
+```
+{"SourceMetadata":{"Data":{"Git":{"commit":"fbc14303ffbf8fb1c2c1914e8dda7d0121633aca","file":"keys","email":"counter \u003ccounter@counters-MacBook-Air.local\u003e","repository":"https://github.com/trufflesecurity/test_keys","timestamp":"2022-06-16 10:17:40 -0700 PDT","line":4}}},"SourceID":0,"SourceType":16,"SourceName":"trufflehog - git","DetectorType":2,"DetectorName":"AWS","DecoderName":"PLAIN","Verified":true,"Raw":"AKIAYVP4CIPPERUVIFXG","Redacted":"AKIAYVP4CIPPERUVIFXG","ExtraData":{"account":"595918472158","arn":"arn:aws:iam::595918472158:user/canarytokens.com@@mirux23ppyky6hx3l6vclmhnj","user_id":"AIDAYVP4CIPPJ5M54LRCY"},"StructuredData":null}
+...
+```
+
+## 4: Verificar um repositório do GitHub + suas Issues e Pull Requests
+>>>>>>> 1a996b2 (readme)
 
 ```bash
 trufflehog github --repo=https://github.com/trufflesecurity/test_keys --issue-comments --pr-comments
 ```
 
-## 5: Scan an S3 bucket for verified keys
+## 5: Verificar um bucket do S3 para chaves verificadas
 
 ```bash
-trufflehog s3 --bucket=<bucket name> --only-verified
+trufflehog s3 --bucket=<nome-do-bucket> --only-verified
 ```
 
-## 6: Scan S3 buckets using IAM Roles
+## 6: Verificar buckets do S3 usando funções IAM
 
 ```bash
-trufflehog s3 --role-arn=<iam role arn>
+trufflehog s3 --role-arn=<arn-da-função-iam>
 ```
 
-## 7: Scan a Github Repo using SSH authentication in docker
+## 7: Verificar um repositório do Github usando autenticação SSH no docker
 
 ```bash
 docker run --rm -v "$HOME/.ssh:/root/.ssh:ro" trufflesecurity/trufflehog:latest git ssh://github.com/trufflesecurity/test_keys
 ```
 
-## 8: Scan individual files or directories
+## 8: Verificar arquivos ou diretórios individuais
 
 ```bash
 trufflehog filesystem path/to/file1.txt path/to/file2.txt path/to/dir
 ```
 
-## 9: Scan GCS buckets for verified secrets
+## 9: Verificar buckets do GCS para segredos verificados
 
 ```bash
-trufflehog gcs --project-id=<project-ID> --cloud-environment --only-verified
+trufflehog gcs --project-id=<ID-do-projeto> --cloud-environment --only-verified
 ```
 
-## 10: Scan a Docker image for verified secrets
+## 10: Verificar uma imagem Docker para segredos verificados
 
-Use the `--image` flag multiple times to scan multiple images.
+Use a opção `--image` várias vezes para verificar várias imagens.
 
 ```bash
 trufflehog docker --image trufflesecurity/secrets --only-verified
 ```
 
-## 11: Scan in CI
+## 11: Verificar no CI
 
-Set the `--since-commit` flag to your default branch that people merge into (ex: "main"). Set the `--branch` flag to your PR's branch name (ex: "feature-1"). Depending on the CI/CD platform you use, this value can be pulled in dynamically (ex: [CIRCLE_BRANCH in Circle CI](https://circleci.com/docs/variables/) and [TRAVIS_PULL_REQUEST_BRANCH in Travis CI](https://docs.travis-ci.com/user/environment-variables/)). If the repo is cloned and the target branch is already checked out during the CI/CD workflow, then `--branch HEAD` should be sufficient. The `--fail` flag will return an 183 error code if valid credentials are found.
+Defina a opção `--since-commit` para o branch padrão que as pessoas mesclam (por exemplo, "main"). Defina a opção `--branch` para o nome do branch do PR (por exemplo, "feature-1"). Dependendo da plataforma CI/CD que você usa, esse valor pode ser extraído dinamicamente (por exemplo, [CIRCLE_BRANCH no Circle CI](https://circleci.com/docs/variables/) e [TRAVIS_PULL_REQUEST_BRANCH no Travis CI](https://docs.travis-ci.com/user/environment-variables/)). Se o repositório for clonado e o branch de destino já estiver verificado durante o fluxo de trabalho do CI/CD, então `--branch HEAD` deve ser suficiente. A opção `--fail` retornará um código de erro 183 se credenciais válidas forem encontradas.
 
 ```bash
 trufflehog git file://. --since-commit main --branch feature-1 --only-verified --fail
 ```
 
-## 12: Scan a Postman workspace
+## 12: Verificar um workspace do Postman
 
-Use the `--workspace-id`, `--collection-id`, `--environment` flags multiple times to scan multiple targets.
+Use as opções `--workspace-id`, `--collection-id` e `--environment` várias vezes para verificar vários alvos.
 
 ```bash
-trufflehog postman --token=<postman api token> --workspace-id=<workspace id>
+trufflehog postman --token=<token-da-api-do-postman> --workspace-id=<ID-do-workspace>
 ```
 
-## 13: Scan a Jenkins server
+## 13: Verificar um servidor Jenkins
 
 ```bash
 trufflehog jenkins --url https://jenkins.example.com --username admin --password admin
 ```
 
-## 14: Scan an Elasticsearch server
+## 14: Verificar um servidor Elasticsearch
 
-### Scan a Local Cluster
+### Verificar um cluster local
 
-There are two ways to authenticate to a local cluster with TruffleHog: (1) username and password, (2) service token.
+Existem duas maneiras de autenticar em um cluster local com o TruffleHog: (1) nome de usuário e senha, (2) token de serviço.
 
-#### Connect to a local cluster with username and password
+#### Conectar a um cluster local com nome de usuário e senha
 
 ```bash
 trufflehog elasticsearch --nodes 192.168.14.3 192.168.14.4 --username truffle --password hog
 ```
 
-#### Connect to a local cluster with a service token
+#### Conectar a um cluster local com um token de serviço
 
 ```bash
 trufflehog elasticsearch --nodes 192.168.14.3 192.168.14.4 --service-token ‘AAEWVaWM...Rva2VuaSDZ’
 ```
 
-### Scan an Elastic Cloud Cluster
+### Verificar um cluster do Elastic Cloud
 
-To scan a cluster on Elastic Cloud, you’ll need a Cloud ID and API key.
+Para verificar um cluster no Elastic Cloud, você precisará de um Cloud ID e uma chave de API.
 
 ```bash
 trufflehog elasticsearch \
@@ -277,6 +270,7 @@ trufflehog elasticsearch \
 ```
 
 # :question: FAQ
+
 
 - All I see is `🐷🔑🐷  TruffleHog. Unearth your secrets. 🐷🔑🐷` and the program exits, what gives?
   - That means no secrets were detected
@@ -583,28 +577,6 @@ detectors:
         unsafe: true
         headers:
           - "Authorization: super secret authorization header"
-```
-
-```
-$ trufflehog filesystem /tmp --config config.yaml --only-verified
-🐷🔑🐷  TruffleHog. Unearth your secrets. 🐷🔑🐷
-
-Found verified result 🐷🔑
-Detector Type: CustomRegex
-Decoder Type: PLAIN
-Raw result: HOGAAIUNNWHAHJJWUQYR
-File: /tmp/hog-facts.txt
-```
-
-Data structure sent to the custom verification server:
-
-```
-{
-    "HogTokenDetector": {
-        "HogID": ["HOGAAIUNNWHAHJJWUQYR"],
-        "HogSecret": ["sD9vzqdSsAOxntjAJ/qZ9sw+8PvEYg0r7D1Hhh0C"],
-    }
-}
 ```
 
 ## Verification Server Example (Python)
