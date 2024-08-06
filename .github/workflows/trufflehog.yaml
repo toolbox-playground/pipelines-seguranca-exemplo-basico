@@ -12,10 +12,14 @@ on:
         description: 'Acionador manual do fluxo de trabalho'  # Descrição da entrada
 
 jobs:
-  snyk-scan:
-    name: Trufflehog Security Check # Nome do trabalho
-    runs-on: ubuntu-latest # Sistema operacional em que o trabalho será executado (no caso, Ubuntu)
-    steps: # Passos a serem executados no trabalho
-
-      - name: Run Trufflehog
-        run: docker run --rm -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/toolbox-playground/pipelines-seguranca-exemplo-basico # Roda o Trufflehog a partigar da imagem Docker
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Secret Scanning
+      uses: trufflesecurity/trufflehog@main
+      with:
+        extra_args: --only-verified
