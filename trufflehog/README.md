@@ -16,7 +16,7 @@ Várias opções estão disponíveis para você:
 brew install trufflehog
 ```
 
-### Docker:
+### Uso com Docker
 
 <sub><i>_Certifique-se de que o Docker esteja em execução antes de executar os comandos a seguir:_</i></sub>
 
@@ -78,6 +78,8 @@ curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scr
 ### Início Rápido
 
 #### 1: Verificar um repositório apenas para segredos verificados
+
+Caso opte por usar o Docker, substitua o comando `trufflehog` pelos comandos exemplificados na seção [Uso com Docker](#uso-com-docker)
 
 Comando:
 
