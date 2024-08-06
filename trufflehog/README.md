@@ -338,6 +338,8 @@ jobs:
 
 No exemplo de configuração acima, estamos verificando segredos em todas as solicitações de pull e push para o branch `main`. Apenas as alterações de código nos commits referenciados são verificadas. Se você deseja verificar um branch inteiro, consulte a seção "Uso Avançado" abaixo.
 
+O arquivos [trufflehog.yaml](../.github/workflows/trufflehog.yaml) usa o exemplo acima.
+
 ### Clonagem Rasa
 
 Se você estiver incorporando o TruffleHog em um fluxo de trabalho independente e não estiver executando nenhuma outra ferramenta de CI/CD junto com o TruffleHog, recomendamos o uso da [Clonagem Rasa](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt) para acelerar seu fluxo de trabalho. Aqui está um exemplo de como fazer isso:
