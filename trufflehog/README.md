@@ -1,4 +1,4 @@
-# Exemplos Básicos de Snyk
+# Exemplos Básicos de Trufflehog
 
 ![Toolbox Playground](../img/toolbox-playground.png)
 
