@@ -529,17 +529,3 @@ with HTTPServer(('', 8000), Verifier) as server:
     except KeyboardInterrupt:
         pass
 ```
-
-# :heart: Contribuidores
-
-Este projeto existe graças a todas as pessoas que contribuem. [[Contribua](CONTRIBUTING.md)].
-
-<a href="https://github.com/trufflesecurity/trufflehog/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=trufflesecurity/trufflehog" />
-</a>
-
-# :computer: Contribuindo
-
-Contribuições são muito bem-vindas! Por favor, consulte nossas [diretrizes de contribuição primeiro](CONTRIBUTING.md).
-
-Não aceitamos mais contribuições para o TruffleHog v2, mas esse código está disponível com a licença GPL 2.0 no histórico deste repositório e nas versões e tags anteriores do pacote. Um CLA concluído é necessário para aceitarmos contribuições daqui para frente.
