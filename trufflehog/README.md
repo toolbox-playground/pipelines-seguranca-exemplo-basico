@@ -193,42 +193,21 @@ trufflehog elasticsearch \
   --api-key 'MlVtVjBZ...ZSYlduYnF1djh3NG5FQQ=='
 ```
 
-# :question: FAQ
+## O que é verificação de credenciais?
+
+Para cada credencial em potencial que é detectada, implementamos cuidadosamente a verificação programática contra a API à qual acreditamos que ela pertence. A verificação elimina falsos positivos. Por exemplo, o detector de credenciais da AWS realiza uma chamada de API `GetCallerIdentity` contra a API da AWS para verificar se uma credencial da AWS está ativa.
 
 
-- All I see is `🐷🔑🐷  TruffleHog. Unearth your secrets. 🐷🔑🐷` and the program exits, what gives?
-  - That means no secrets were detected
-- Why is the scan taking a long time when I scan a GitHub org
-  - Unauthenticated GitHub scans have rate limits. To improve your rate limits, include the `--token` flag with a personal access token
-- It says a private key was verified, what does that mean?
-  - Check out our Driftwood blog post to learn how to do this, in short we've confirmed the key can be used live for SSH or SSL [Blog post](https://trufflesecurity.com/blog/driftwood-know-if-private-keys-are-sensitive/)
-- Is there an easy way to ignore specific secrets?
-  - If the scanned source [supports line numbers](https://github.com/trufflesecurity/trufflehog/blob/d6375ba92172fd830abb4247cca15e3176448c5d/pkg/engine/engine.go#L358-L365), then you can add a `trufflehog:ignore` comment on the line containing the secret to ignore that secrets.
+# Uso
 
-# :newspaper: What's new in v3?
-
-TruffleHog v3 is a complete rewrite in Go with many new powerful features.
-
-- We've **added over 700 credential detectors that support active verification against their respective APIs**.
-- We've also added native **support for scanning GitHub, GitLab, Docker, filesystems, S3, GCS, Circle CI and Travis CI**.
-- **Instantly verify private keys** against millions of github users and **billions** of TLS certificates using our [Driftwood](https://trufflesecurity.com/blog/driftwood) technology.
-- Scan binaries, documents, and other file formats
-- Available as a GitHub Action and a pre-commit hook
-
-## What is credential verification?
-
-For every potential credential that is detected, we've painstakingly implemented programmatic verification against the API that we think it belongs to. Verification eliminates false positives. For example, the [AWS credential detector](pkg/detectors/aws/aws.go) performs a `GetCallerIdentity` API call against the AWS API to verify if an AWS credential is active.
-
-# :memo: Usage
-
-TruffleHog has a sub-command for each source of data that you may want to scan:
+TruffleHog possui um subcomando para cada fonte de dados que você pode querer escanear:
 
 - git
 - github
 - gitlab
 - docker
 - s3
-- filesystem (files and directories)
+- filesystem (arquivos e diretórios)
 - syslog
 - circleci
 - travisci
@@ -237,64 +216,64 @@ TruffleHog has a sub-command for each source of data that you may want to scan:
 - jenkins
 - elasticsearch
 
-Each subcommand can have options that you can see with the `--help` flag provided to the sub command:
+Cada subcomando pode ter opções que você pode ver com a flag `--help` fornecida ao subcomando:
 
 ```
 $ trufflehog git --help
 usage: TruffleHog git [<flags>] <uri>
 
-Find credentials in git repositories.
+Encontre credenciais nos repositórios git.
 
 Flags:
-  -h, --help                Show context-sensitive help (also try --help-long and --help-man).
-      --debug               Run in debug mode.
-      --trace               Run in trace mode.
-      --profile             Enables profiling and sets a pprof and fgprof server on :18066.
-  -j, --json                Output in JSON format.
-      --json-legacy         Use the pre-v3.0 JSON format. Only works with git, gitlab, and github sources.
-      --github-actions      Output in GitHub Actions format.
-      --concurrency=20           Number of concurrent workers.
-      --no-verification     Don't verify the results.
-      --only-verified       Only output verified results.
+  -h, --help                Mostra ajuda sensível ao contexto (tente também --help-long e --help-man).
+      --debug               Executa no modo de depuração.
+      --trace               Executa no modo de rastreamento.
+      --profile             Ativa o perfilamento e define um servidor pprof e fgprof em :18066.
+  -j, --json                Saída no formato JSON.
+      --json-legacy         Usa o formato JSON pré-v3.0. Funciona apenas com fontes git, gitlab e github.
+      --github-actions      Saída no formato GitHub Actions.
+      --concurrency=20           Número de trabalhadores simultâneos.
+      --no-verification     Não verifica os resultados.
+      --only-verified       Apenas exibe resultados verificados.
       --allow-verification-overlap
-                                 Allow verification of similar credentials across detectors
-      --filter-unverified   Only output first unverified result per chunk per detector if there are more than one results.
+                                 Permite a verificação de credenciais semelhantes em detectores diferentes.
+      --filter-unverified   Apenas exibe o primeiro resultado não verificado por fragmento por detector, se houver mais de um resultado.
       --filter-entropy=FILTER-ENTROPY
-                                 Filter unverified results with Shannon entropy. Start with 3.0.
-      --config=CONFIG            Path to configuration file.
+                                 Filtra resultados não verificados com entropia de Shannon. Comece com 3.0.
+      --config=CONFIG            Caminho para o arquivo de configuração.
       --print-avg-detector-time
-                                 Print the average time spent on each detector.
-      --no-update           Don't check for updates.
-      --fail                Exit with code 183 if results are found.
-      --verifier=VERIFIER ...    Set custom verification endpoints.
-      --custom-verifiers-only   Only use custom verification endpoints.
+                                 Exibe o tempo médio gasto em cada detector.
+      --no-update           Não verifica atualizações.
+      --fail                Sai com o código 183 se forem encontrados resultados.
+      --verifier=VERIFIER ...    Define pontos de verificação personalizados.
+      --custom-verifiers-only   Usa apenas pontos de verificação personalizados.
       --archive-max-size=ARCHIVE-MAX-SIZE
-                                 Maximum size of archive to scan. (Byte units eg. 512B, 2KB, 4MB)
+                                 Tamanho máximo do arquivo para verificação. (Unidades de bytes, por exemplo, 512B, 2KB, 4MB)
       --archive-max-depth=ARCHIVE-MAX-DEPTH
-                                 Maximum depth of archive to scan.
+                                 Profundidade máxima do arquivo para verificação.
       --archive-timeout=ARCHIVE-TIMEOUT
-                                 Maximum time to spend extracting an archive.
-      --include-detectors="all"  Comma separated list of detector types to include. Protobuf name or IDs may be used, as well as ranges.
+                                 Tempo máximo para extrair um arquivo.
+      --include-detectors="all"  Lista separada por vírgulas de tipos de detectores a serem incluídos. Pode-se usar o nome ou IDs do Protobuf, bem como intervalos.
       --exclude-detectors=EXCLUDE-DETECTORS
-                                 Comma separated list of detector types to exclude. Protobuf name or IDs may be used, as well as ranges. IDs defined here take precedence over the include list.
-      --version             Show application version.
+                                 Lista separada por vírgulas de tipos de detectores a serem excluídos. Pode-se usar o nome ou IDs do Protobuf, bem como intervalos. Os IDs definidos aqui têm precedência sobre a lista de inclusão.
+      --version             Mostra a versão do aplicativo.
   -i, --include-paths=INCLUDE-PATHS
-                                 Path to file with newline separated regexes for files to include in scan.
+                                 Caminho para o arquivo com expressões regulares separadas por nova linha para arquivos a serem incluídos na verificação.
   -x, --exclude-paths=EXCLUDE-PATHS
-                                 Path to file with newline separated regexes for files to exclude in scan.
+                                 Caminho para o arquivo com expressões regulares separadas por nova linha para arquivos a serem excluídos na verificação.
       --exclude-globs=EXCLUDE-GLOBS
-                                 Comma separated list of globs to exclude in scan. This option filters at the `git log` level, resulting in faster scans.
+                                 Lista separada por vírgulas de globos a serem excluídos na verificação. Essa opção filtra no nível do `git log`, resultando em verificações mais rápidas.
       --since-commit=SINCE-COMMIT
-                                 Commit to start scan from.
-      --branch=BRANCH            Branch to scan.
-      --max-depth=MAX-DEPTH      Maximum depth of commits to scan.
-      --bare                Scan bare repository (e.g. useful while using in pre-receive hooks)
+                                 Commit para iniciar a verificação.
+      --branch=BRANCH            Branch para verificação.
+      --max-depth=MAX-DEPTH      Profundidade máxima de commits para verificação.
+      --bare                Verifica repositório nu (por exemplo, útil ao usar em ganchos pré-receber)
 
 Args:
-  <uri>  Git repository URL. https://, file://, or ssh:// schema expected.
+  <uri>  URL do repositório Git. Esperado esquema https://, file:// ou ssh://.
 ```
 
-For example, to scan a `git` repository, start with
+Por exemplo, para verificar um repositório `git`, comece com
 
 ```
 trufflehog git https://github.com/trufflesecurity/trufflehog.git
@@ -302,37 +281,37 @@ trufflehog git https://github.com/trufflesecurity/trufflehog.git
 
 ## S3
 
-The S3 source supports assuming IAM roles for scanning in addition to IAM users. This makes it easier for users to scan multiple AWS accounts without needing to rely on hardcoded credentials for each account.
+A fonte S3 suporta a suposição de funções IAM para verificação, além de usuários IAM. Isso facilita a verificação de várias contas da AWS sem a necessidade de depender de credenciais codificadas para cada conta.
 
-The IAM identity that TruffleHog uses initially will need to have `AssumeRole` privileges as a principal in the [trust policy](https://aws.amazon.com/blogs/security/how-to-use-trust-policies-with-iam-roles/) of each IAM role to assume.
+A identidade IAM que o TruffleHog usa inicialmente precisará ter privilégios de "AssumeRole" como um principal na [política de confiança](https://aws.amazon.com/blogs/security/how-to-use-trust-policies-with-iam-roles/) de cada função IAM a ser assumida.
 
-To scan a specific bucket using locally set credentials or instance metadata if on an EC2 instance:
-
-```bash
-trufflehog s3 --bucket=<bucket-name>
-```
-
-To scan a specific bucket using an assumed role:
+Para verificar um bucket específico usando credenciais definidas localmente ou metadados de instância se estiver em uma instância EC2:
 
 ```bash
-trufflehog s3 --bucket=<bucket-name> --role-arn=<iam-role-arn>
+trufflehog s3 --bucket=<nome-do-bucket>
 ```
 
-Multiple roles can be passed as separate arguments. The following command will attempt to scan every bucket each role has permissions to list in the S3 API:
+Para verificar um bucket específico usando uma função assumida:
 
 ```bash
-trufflehog s3 --role-arn=<iam-role-arn-1> --role-arn=<iam-role-arn-2>
+trufflehog s3 --bucket=<nome-do-bucket> --role-arn=<arn-da-função-iam>
 ```
 
-Exit Codes:
+Várias funções podem ser passadas como argumentos separados. O comando a seguir tentará verificar todos os buckets para os quais cada função tem permissões de listagem na API do S3:
 
-- 0: No errors and no results were found.
-- 1: An error was encountered. Sources may not have completed scans.
-- 183: No errors were encountered, but results were found. Will only be returned if `--fail` flag is used.
+```bash
+trufflehog s3 --role-arn=<arn-da-função-iam-1> --role-arn=<arn-da-função-iam-2>
+```
 
-## :octocat: TruffleHog Github Action
+Códigos de Saída:
 
-### General Usage
+- 0: Sem erros e nenhum resultado foi encontrado.
+- 1: Um erro foi encontrado. As fontes podem não ter concluído as verificações.
+- 183: Nenhum erro foi encontrado, mas resultados foram encontrados. Será retornado apenas se a opção `--fail` for usada.
+
+## :octocat: Ação do GitHub TruffleHog
+
+### Uso Geral
 
 ```
 on:
@@ -345,21 +324,21 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
+    - name: Checkout do código
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    - name: Secret Scanning
+    - name: Verificação de Segredos
       uses: trufflesecurity/trufflehog@main
       with:
         extra_args: --only-verified
 ```
 
-In the example config above, we're scanning for live secrets in all PRs and Pushes to `main`. Only code changes in the referenced commits are scanned. If you'd like to scan an entire branch, please see the "Advanced Usage" section below.
+No exemplo de configuração acima, estamos verificando segredos em todas as solicitações de pull e push para o branch `main`. Apenas as alterações de código nos commits referenciados são verificadas. Se você deseja verificar um branch inteiro, consulte a seção "Uso Avançado" abaixo.
 
-### Shallow Cloning
+### Clonagem Rasa
 
-If you're incorporating TruffleHog into a standalone workflow and aren't running any other CI/CD tooling alongside TruffleHog, then we recommend using [Shallow Cloning](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt) to speed up your workflow. Here's an example for how to do it:
+Se você estiver incorporando o TruffleHog em um fluxo de trabalho independente e não estiver executando nenhuma outra ferramenta de CI/CD junto com o TruffleHog, recomendamos o uso da [Clonagem Rasa](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt) para acelerar seu fluxo de trabalho. Aqui está um exemplo de como fazer isso:
 
 ```
 ...
@@ -383,33 +362,33 @@ If you're incorporating TruffleHog into a standalone workflow and aren't running
 ...
 ```
 
-Depending on the event type (push or PR), we calculate the number of commits present. Then we add 2, so that we can reference a base commit before our code changes. We pass that integer value to the `fetch-depth` flag in the checkout action in addition to the relevant branch. Now our checkout process should be much shorter.
+Dependendo do tipo de evento (push ou PR), calculamos o número de commits presentes. Em seguida, adicionamos 2, para que possamos fazer referência a um commit base antes das alterações de código. Passamos esse valor inteiro para a flag `fetch-depth` na ação de checkout, além do branch relevante. Agora, nosso processo de checkout deve ser muito mais curto.
 
-### Canary detection
+### Detecção de canário
 
-TruffleHog statically detects [https://canarytokens.org/](https://canarytokens.org/) and lets you know when they're present without setting them off. You can learn more here: [https://trufflesecurity.com/canaries](https://trufflesecurity.com/canaries)
+O TruffleHog detecta estaticamente [https://canarytokens.org/](https://canarytokens.org/) e informa quando eles estão presentes sem ativá-los. Você pode saber mais aqui: [https://trufflesecurity.com/canaries](https://trufflesecurity.com/canaries)
 
 ![image](https://github.com/trufflesecurity/trufflehog/assets/52866392/74ace530-08c5-4eaf-a169-84a73e328f6f)
 
-### Advanced Usage
+### Uso Avançado
 
 ```yaml
 - name: TruffleHog
   uses: trufflesecurity/trufflehog@main
   with:
-    # Repository path
+    # Caminho do repositório
     path:
-    # Start scanning from here (usually main branch).
+    # Iniciar a verificação a partir daqui (geralmente o branch principal).
     base:
-    # Scan commits until here (usually dev branch).
-    head: # optional
-    # Extra args to be passed to the trufflehog cli.
+    # Verificar commits até aqui (geralmente o branch de desenvolvimento).
+    head: # opcional
+    # Argumentos extras a serem passados para o CLI do trufflehog.
     extra_args: --debug --only-verified
 ```
 
-If you'd like to specify specific `base` and `head` refs, you can use the `base` argument (`--since-commit` flag in TruffleHog CLI) and the `head` argument (`--branch` flag in the TruffleHog CLI). We only recommend using these arguments for very specific use cases, where the default behavior does not work.
+Se você deseja especificar refs específicos `base` e `head`, você pode usar o argumento `base` (flag `--since-commit` no CLI do TruffleHog) e o argumento `head` (flag `--branch` no CLI do TruffleHog). Recomendamos o uso desses argumentos apenas para casos de uso muito específicos, onde o comportamento padrão não funciona.
 
-#### Advanced Usage: Scan entire branch
+#### Uso Avançado: Verificar o branch inteiro
 
 ```
 - name: scan-push
@@ -422,18 +401,18 @@ If you'd like to specify specific `base` and `head` refs, you can use the `base`
 
 ## TruffleHog GitLab CI
 
-### Example Usage
+### Exemplo de Uso
 
 ```yaml
 stages:
-  - security
+  - segurança
 
-security-secrets:
-  stage: security
+segredos-de-segurança:
+  stage: segurança
   allow_failure: false
   image: alpine:latest
   variables:
-    SCAN_PATH: "." # Set the relative path in the repo to scan
+    SCAN_PATH: "." # Defina o caminho relativo no repositório a ser verificado
   before_script:
     - apk add --no-cache git curl jq
     - curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
@@ -443,18 +422,18 @@ security-secrets:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
 ```
 
-In the example pipeline above, we're scanning for live secrets in all repository directories and files. This job runs only when the pipeline source is a merge request event, meaning it's triggered when a new merge request is created.
+No exemplo de pipeline acima, estamos verificando segredos em todos os diretórios e arquivos do repositório. Esse job é executado apenas quando a origem do pipeline é um evento de solicitação de merge, ou seja, é acionado quando uma nova solicitação de merge é criada.
 
-## Pre-commit Hook
+## Hook Pré-commit
 
-TruffleHog can be used in a pre-commit hook to prevent credentials from leaking before they ever leave your computer.
+O TruffleHog pode ser usado em um hook pré-commit para evitar vazamentos de credenciais antes mesmo de saírem do seu computador.
 
-**Key Usage Note:**
+**Observação importante sobre o uso:**
 
-- **For optimal hook efficacy, execute `git add` followed by `git commit` separately.** This ensures TruffleHog analyzes all intended changes.
-- **Avoid using `git commit -am`, as it might bypass pre-commit hook execution for unstaged modifications.**
+- **Para obter a eficácia ideal do hook, execute `git add` seguido de `git commit` separadamente.** Isso garante que o TruffleHog analise todas as alterações pretendidas.
+- **Evite usar `git commit -am`, pois isso pode ignorar a execução do hook pré-commit para modificações não confirmadas.**
 
-An example `.pre-commit-config.yaml` is provided (see [pre-commit.com](https://pre-commit.com/) for installation).
+Um exemplo de `.pre-commit-config.yaml` é fornecido (consulte [pre-commit.com](https://pre-commit.com/) para instalação).
 
 ```yaml
 repos:
@@ -462,29 +441,29 @@ repos:
     hooks:
       - id: trufflehog
         name: TruffleHog
-        description: Detect secrets in your data.
+        description: Detecta segredos em seus dados.
         entry: bash -c 'trufflehog git file://. --since-commit HEAD --only-verified --fail'
-        # For running trufflehog in docker, use the following entry instead:
+        # Para executar o trufflehog em um contêiner Docker, use a seguinte entrada em vez disso:
         # entry: bash -c 'docker run --rm -v "$(pwd):/workdir" -i --rm trufflesecurity/trufflehog:latest git file:///workdir --since-commit HEAD --only-verified --fail'
         language: system
         stages: ["commit", "push"]
 ```
 
-## Regex Detector (alpha)
+## Detector de Regex (alfa)
 
-TruffleHog supports detection and verification of custom regular expressions.
-For detection, at least one **regular expression** and **keyword** is required.
-A **keyword** is a fixed literal string identifier that appears in or around
-the regex to be detected. To allow maximum flexibility for verification, a
-webhook is used containing the regular expression matches.
+O TruffleHog suporta a detecção e verificação de expressões regulares personalizadas.
+Para a detecção, é necessário pelo menos uma **expressão regular** e uma **palavra-chave**.
+Uma **palavra-chave** é uma string literal fixa que aparece na ou ao redor
+da regex a ser detectada. Para permitir a máxima flexibilidade para a verificação, é
+usado um webhook contendo as correspondências da expressão regular.
 
-TruffleHog will send a JSON POST request containing the regex matches to a
-configured webhook endpoint. If the endpoint responds with a `200 OK` response
-status code, the secret is considered verified.
+O TruffleHog enviará uma solicitação POST JSON contendo as correspondências da regex para um
+endpoint de webhook configurado. Se o endpoint responder com um código de status `200 OK`,
+o segredo será considerado verificado.
 
-**NB:** This feature is alpha and subject to change.
+**Observação:** Este recurso está em fase alfa e está sujeito a alterações.
 
-## Regex Detector Example
+## Exemplo de Detector de Regex
 
 ```yaml
 # config.yaml
@@ -497,17 +476,15 @@ detectors:
       hogToken: '[^A-Za-z0-9+\/]{0,1}([A-Za-z0-9+\/]{40})[^A-Za-z0-9+\/]{0,1}'
     verify:
       - endpoint: http://localhost:8000/
-        # unsafe must be set if the endpoint is HTTP
+        # unsafe deve ser definido se o endpoint for HTTP
         unsafe: true
         headers:
           - "Authorization: super secret authorization header"
 ```
 
-## Verification Server Example (Python)
+## Exemplo de Servidor de Verificação (Python)
 
-Unless you run a verification server, secrets found by the custom regex
-detector will be unverified. Here is an example Python implementation of a
-verification server for the above `config.yaml` file.
+A menos que você execute um servidor de verificação, os segredos encontrados pelo detector de regex personalizado não serão verificados. Aqui está um exemplo de implementação em Python de um servidor de verificação para o arquivo `config.yaml` acima.
 
 ```python
 import json
@@ -528,17 +505,17 @@ class Verifier(BaseHTTPRequestHandler):
                 self.end_headers()
                 return
 
-            # read the body
+            # ler o corpo
             length = int(self.headers['Content-Length'])
             request = json.loads(self.rfile.read(length))
             self.log_message("%s", request)
 
-            # check the match, you'll need to implement validateToken, which takes an array of ID's and Secrets
+            # verificar a correspondência, você precisará implementar validateToken, que recebe uma matriz de IDs e Segredos
             if not validateTokens(request['HogTokenDetector']['hogID'], request['HogTokenDetector']['hogSecret']):
                 self.send_response(200)
                 self.end_headers()
             else:
-                # any other response besides 200
+                # qualquer outra resposta além de 200
                 self.send_response(406)
                 self.end_headers()
         except Exception:
@@ -553,29 +530,16 @@ with HTTPServer(('', 8000), Verifier) as server:
         pass
 ```
 
-# :heart: Contributors
+# :heart: Contribuidores
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+Este projeto existe graças a todas as pessoas que contribuem. [[Contribua](CONTRIBUTING.md)].
 
 <a href="https://github.com/trufflesecurity/trufflehog/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=trufflesecurity/trufflehog" />
 </a>
 
-# :computer: Contributing
+# :computer: Contribuindo
 
-Contributions are very welcome! Please see our [contribution guidelines first](CONTRIBUTING.md).
+Contribuições são muito bem-vindas! Por favor, consulte nossas [diretrizes de contribuição primeiro](CONTRIBUTING.md).
 
-We no longer accept contributions to TruffleHog v2, but that code is available in the `v2` branch.
-
-## Adding new secret detectors
-
-We have published some [documentation and tooling to get started on adding new secret detectors](hack/docs/Adding_Detectors_external.md). Let's improve detection together!
-
-# Use as a library
-
-Currently, trufflehog is in heavy development and no guarantees can be made on
-the stability of the public APIs at this time.
-
-# License Change
-
-Since v3.0, TruffleHog is released under a AGPL 3 license, included in [`LICENSE`](LICENSE). TruffleHog v3.0 uses none of the previous codebase, but care was taken to preserve backwards compatibility on the command line interface. The work previous to this release is still available licensed under GPL 2.0 in the history of this repository and the previous package releases and tags. A completed CLA is required for us to accept contributions going forward.
+Não aceitamos mais contribuições para o TruffleHog v2, mas esse código está disponível com a licença GPL 2.0 no histórico deste repositório e nas versões e tags anteriores do pacote. Um CLA concluído é necessário para aceitarmos contribuições daqui para frente.
