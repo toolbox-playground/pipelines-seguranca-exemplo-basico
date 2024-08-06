@@ -85,29 +85,7 @@ Comando:
 trufflehog git https://github.com/trufflesecurity/test_keys --only-verified
 ```
 
-<<<<<<< HEAD
-## 2: Scan a GitHub Org for only verified secrets
-=======
-Saída esperada:
-
-```
-🐷🔑🐷  TruffleHog. Unearth your secrets. 🐷🔑🐷
-
-Found verified result 🐷🔑
-Detector Type: AWS
-Decoder Type: PLAIN
-Raw result: AKIAYVP4CIPPERUVIFXG
-Line: 4
-Commit: fbc14303ffbf8fb1c2c1914e8dda7d0121633aca
-File: keys
-Email: counter <counter@counters-MacBook-Air.local>
-Repository: https://github.com/trufflesecurity/test_keys
-Timestamp: 2022-06-16 10:17:40 -0700 PDT
-...
-```
-
 ## 2: Verificar uma organização do GitHub apenas para segredos verificados
->>>>>>> 1a996b2 (readme)
 
 ```bash
 trufflehog github --org=trufflesecurity --only-verified
@@ -121,18 +99,7 @@ Comando:
 trufflehog git https://github.com/trufflesecurity/test_keys --only-verified --json
 ```
 
-<<<<<<< HEAD
 ## 4: Scan a GitHub Repo + its Issues and Pull Requests
-=======
-Saída esperada:
-
-```
-{"SourceMetadata":{"Data":{"Git":{"commit":"fbc14303ffbf8fb1c2c1914e8dda7d0121633aca","file":"keys","email":"counter \u003ccounter@counters-MacBook-Air.local\u003e","repository":"https://github.com/trufflesecurity/test_keys","timestamp":"2022-06-16 10:17:40 -0700 PDT","line":4}}},"SourceID":0,"SourceType":16,"SourceName":"trufflehog - git","DetectorType":2,"DetectorName":"AWS","DecoderName":"PLAIN","Verified":true,"Raw":"AKIAYVP4CIPPERUVIFXG","Redacted":"AKIAYVP4CIPPERUVIFXG","ExtraData":{"account":"595918472158","arn":"arn:aws:iam::595918472158:user/canarytokens.com@@mirux23ppyky6hx3l6vclmhnj","user_id":"AIDAYVP4CIPPJ5M54LRCY"},"StructuredData":null}
-...
-```
-
-## 4: Verificar um repositório do GitHub + suas Issues e Pull Requests
->>>>>>> 1a996b2 (readme)
 
 ```bash
 trufflehog github --repo=https://github.com/trufflesecurity/test_keys --issue-comments --pr-comments
