@@ -2,16 +2,9 @@
 
 ![Toolbox Playground](../img/toolbox-playground.png)
 
-TruffleHog™ é uma ferramenta de verificação de segredos que investiga profundamente seus repositórios de código em busca de segredos, senhas e chaves sensíveis.
+[TruffleHog](https://trufflesecurity.com/trufflehog) é uma ferramenta de verificação de segredos que investiga profundamente seus repositórios de código em busca de segredos, senhas e chaves sensíveis.
 
 Para obter mais informações sobre o TruffleHog, visite a [página do TruffleHog](https://trufflesecurity.com/trufflehog?gclid=CjwKCAjwouexBhAuEiwAtW_Zx5IW87JNj97Ci7heFnA5ar6-DuNzT2Y5nIl9DuZ-FOUqx0Qg3vb9nxoClcEQAvD_BwE).
-
-## Usage
-
-
-```bash
-docker run --rm -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github
-```
 
 ## Instalação
 
@@ -27,25 +20,25 @@ brew install trufflehog
 
 <sub><i>_Certifique-se de que o Docker esteja em execução antes de executar os comandos a seguir:_</i></sub>
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;Unix
+#### Unix
 
 ```bash
 docker run --rm -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/trufflesecurity/test_keys
 ```
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;Prompt de Comando do Windows
+#### Prompt de Comando do Windows
 
 ```bash
 docker run --rm -it -v "%cd:/=\%:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/trufflesecurity/test_keys
 ```
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;PowerShell do Windows
+#### PowerShell do Windows
 
 ```bash
 docker run --rm -it -v "${PWD}:/pwd" trufflesecurity/trufflehog github --repo https://github.com/trufflesecurity/test_keys
 ```
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;M1 e M2 Mac
+#### M1 e M2 Mac
 
 ```bash
 docker run --platform linux/arm64 --rm -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest github --repo https://github.com/trufflesecurity/test_keys
@@ -82,45 +75,9 @@ curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scr
 curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin <ReleaseTag como v3.56.0>
 ```
 
-# :closed_lock_with_key: Verificando os artefatos
+### Início Rápido
 
-Checksums são aplicados a todos os artefatos, e o arquivo de checksum resultante é assinado usando o cosign.
-
-Você precisa da seguinte ferramenta para verificar a assinatura:
-
-- [Cosign](https://docs.sigstore.dev/cosign/installation/)
-
-As etapas de verificação são as seguintes:
-
-1. Baixe os arquivos de artefato que você deseja e os seguintes arquivos da página de [releases](https://github.com/trufflesecurity/trufflehog/releases).
-
-  - trufflehog\_{versão}\_checksums.txt
-  - trufflehog\_{versão}\_checksums.txt.pem
-  - trufflehog\_{versão}\_checksums.txt.sig
-
-2. Verifique a assinatura:
-
-  ```shell
-  cosign verify-blob <caminho para trufflehog_{versão}_checksums.txt> \
-  --certificate <caminho para trufflehog_{versão}_checksums.txt.pem> \
-  --signature <caminho para trufflehog_{versão}_checksums.txt.sig> \
-  --certificate-identity-regexp 'https://github\.com/trufflesecurity/trufflehog/\.github/workflows/.+' \
-  --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
-  ```
-
-3. Uma vez que a assinatura for confirmada como válida, você pode prosseguir para validar que as somas SHA256 estão alinhadas com o artefato baixado:
-
-  ```shell
-  sha256sum --ignore-missing -c trufflehog_{versão}_checksums.txt
-  ```
-
-Substitua `{versão}` pela versão dos arquivos baixados.
-
-Alternativamente, se você estiver usando o script de instalação, passe a opção `-v` para realizar a verificação da assinatura. Isso requer que o binário Cosign esteja instalado antes de executar o script de instalação.
-
-# :rocket: Início Rápido
-
-## 1: Verificar um repositório apenas para segredos verificados
+#### 1: Verificar um repositório apenas para segredos verificados
 
 Comando:
 
