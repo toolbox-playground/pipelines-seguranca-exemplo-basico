@@ -350,7 +350,7 @@ jobs:
 
 No exemplo de configuração acima, estamos verificando segredos em todas as solicitações de pull e push para o branch `main`. Apenas as alterações de código nos commits referenciados são verificadas. Se você deseja verificar um branch inteiro, consulte a seção "Uso Avançado" abaixo.
 
-O arquivos [trufflehog.yaml](../.github/workflows/trufflehog.yaml) usa o exemplo acima.
+O arquivo [trufflehog.yaml](../.github/workflows/trufflehog.yaml) usa o exemplo acima.
 
 ### Clonagem Rasa
 
