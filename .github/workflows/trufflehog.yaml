@@ -19,6 +19,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
+    - name: Docker Build
+      run: docker build -t trufflehog-python:latest -f trufflehog/python/Dockerfile trufflehog/python # Constrói a imagem Docker
     - name: Secret Scanning
       uses: trufflesecurity/trufflehog@main
       with:
