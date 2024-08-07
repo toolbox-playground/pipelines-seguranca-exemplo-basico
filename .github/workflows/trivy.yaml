@@ -3,9 +3,13 @@ on:
   push:
     branches:
       - main  # Aciona o fluxo de trabalho quando houver push na brach main
+    paths:
+      - 'trivy/python'  # Aciona o fluxo de trabalho quando houver push na pasta trivy
   pull_request:
     branches:
       - main # Aciona o fluxo de trabalho quando houver PR na brach main
+    paths:
+      - 'trivy/python'  # Aciona o fluxo de trabalho quando houver PR na pasta trivy
   workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
     inputs:  # Define entradas para o fluxo de trabalho
       name:  # Define a entrada "name"
@@ -18,10 +22,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Checkout code # Ação para clonar o repositório
+        uses: actions/checkout@v4 # Usa a ação para clonar o repositório
+        
+      - name: Docker Build
+        run: docker build -t trufflehog-python:latest -f trivy/python/Dockerfile trivy/python # Constrói a imagem Docker
+
       - name: Run Trivy vulnerability scanner in repo mode
         uses: aquasecurity/trivy-action@0.20.0
         with:
-          scan-type: 'fs'
+          scan-type: 'image'
+          image-ref: 'trufflehog-python:latest'
           ignore-unfixed: true
           format: 'json'
         #   output: 'trivy-results.sarif'
