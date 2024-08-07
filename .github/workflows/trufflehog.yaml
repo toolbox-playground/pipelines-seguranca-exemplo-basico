@@ -3,9 +3,13 @@ on:
   push:
     branches:
       - main  # Aciona o fluxo de trabalho quando houver push na brach main
+    paths:
+      - 'trufflehog/python'  # Aciona o fluxo de trabalho quando houver push na pasta trufflehog
   pull_request:
     branches:
       - main # Aciona o fluxo de trabalho quando houver PR na brach main
+    paths:
+      - 'trufflehog/python'  # Aciona o fluxo de trabalho quando houver PR na pasta trufflehog
   workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
     inputs:  # Define entradas para o fluxo de trabalho
       name:  # Define a entrada "name"
@@ -17,11 +21,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      
     - name: Docker Build
       run: docker build -t trufflehog-python:latest -f trufflehog/python/Dockerfile trufflehog/python # Constrói a imagem Docker
+
     - name: Secret Scanning
-      uses: trufflesecurity/trufflehog@main
-      with:
-        extra_args: --only-verified
+      run: docker run --rm trufflehog:latest docker --image trufflehog-python:latest --only-verified
