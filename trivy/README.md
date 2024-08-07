@@ -2,7 +2,7 @@
 
 ![Toolbox Playground](../img/toolbox-playground.png)
 
-Trivy ([pronúncia][pronúncia]) é um scanner de segurança abrangente e versátil.
+Trivy é um scanner de segurança abrangente e versátil.
 Trivy possui *scanners* que procuram por problemas de segurança e *alvos* onde ele pode encontrar esses problemas.
 
 Alvos (o que o Trivy pode escanear):
@@ -61,81 +61,54 @@ Exemplos:
 trivy image python:3.4-alpine
 ```
 
-<details>
-<summary>Resultado</summary>
-
-https://user-images.githubusercontent.com/1161307/171013513-95f18734-233d-45d3-aaf5-d6aec687db0e.mov
-
-</details>
-
 ```bash
 trivy fs --scanners vuln,secret,misconfig myproject/
 ```
-
-<details>
-<summary>Resultado</summary>
-
-https://user-images.githubusercontent.com/1161307/171013917-b1f37810-f434-465c-b01a-22de036bd9b3.mov
-
-</details>
 
 ```bash
 trivy k8s --report summary cluster
 ```
 
-<details>
-<summary>Resultado</summary>
+## :octocat: GitHub Actions
 
-![k8s summary](docs/imgs/trivy-k8s.png)
+### Uso Geral
 
-</details>
+```yaml
+name: Secrets Check with Trivy
+on:
+  push:
+    branches:
+      - main  # Aciona o fluxo de trabalho quando houver push na brach main
+    paths:
+      - 'trivy/python'  # Aciona o fluxo de trabalho quando houver push na pasta trivy
+  pull_request:
+    branches:
+      - main # Aciona o fluxo de trabalho quando houver PR na brach main
+    paths:
+      - 'trivy/python'  # Aciona o fluxo de trabalho quando houver PR na pasta trivy
+  workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
+    inputs:  # Define entradas para o fluxo de trabalho
+      name:  # Define a entrada "name"
+        description: 'Acionador manual do fluxo de trabalho'  # Descrição da entrada
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code # Ação para clonar o repositório
+        uses: actions/checkout@v4 # Usa a ação para clonar o repositório
+        
+      - name: Docker Build # Constrói a imagem Docker
+        run: docker build -t trivy-python:latest -f trivy/python/Dockerfile trivy/python # Constrói a imagem Docker
 
-## Perguntas frequentes
+      - name: Run Trivy vulnerability scanner in repo mode
+        uses: aquasecurity/trivy-action@0.20.0 # Usa a ação para executar o scanner de vulnerabilidades Trivy
+        with:
+          scan-type: 'image' # Define o tipo de verificação
+          image-ref: 'trivy-python:latest' # Define a referência da imagem
 
-### Como pronunciar o nome "Trivy"?
+```
 
-`tri` é pronunciado como **tri**gger, `vy` é pronunciado como en**vy**.
+No exemplo de configuração acima, estamos verificando a segurança da imagem gerada, **trivy-python:latest**.
 
-## Quer mais? Confira Aqua
-
-Se você gostou do Trivy, vai adorar o Aqua, que se baseia no Trivy para fornecer capacidades ainda mais aprimoradas para uma oferta completa de gerenciamento de segurança.
-Você pode encontrar uma tabela de comparação de alto nível específica para usuários do Trivy [aqui](https://github.com/aquasecurity/resources/blob/main/trivy-aqua.md).
-Além disso, confira o site <https://aquasec.com> para obter mais informações sobre nossos produtos e serviços.
-Se você deseja entrar em contato com a Aqua ou solicitar uma demonstração, utilize este formulário: <https://www.aquasec.com/demo>
-
-## Comunidade
-
-O Trivy é um projeto de código aberto da [Aqua Security][aquasec].
-Saiba mais sobre nosso trabalho de código aberto e portfólio [aqui][oss].
-Entre em contato conosco sobre qualquer assunto abrindo uma discussão no GitHub [aqui][discussions].
-Junte-se à nossa comunidade no [Slack][slack] para ficar atualizado com os esforços da comunidade.
-
-Por favor, siga nosso [Código de Conduta][code-of-conduct] durante todas as interações.
-
-[test]: https://github.com/aquasecurity/trivy/actions/workflows/test.yaml
-[test-img]: https://github.com/aquasecurity/trivy/actions/workflows/test.yaml/badge.svg
-[go-report]: https://goreportcard.com/report/github.com/aquasecurity/trivy
-[go-report-img]: https://goreportcard.com/badge/github.com/aquasecurity/trivy
-[release]: https://github.com/aquasecurity/trivy/releases
-[release-img]: https://img.shields.io/github/release/aquasecurity/trivy.svg?logo=github
-[github-downloads-img]: https://img.shields.io/github/downloads/aquasecurity/trivy/total?logo=github
-[docker-pulls]: https://img.shields.io/docker/pulls/aquasec/trivy?logo=docker&label=docker%20pulls%20%2F%20trivy
-[license]: https://github.com/aquasecurity/trivy/blob/main/LICENSE
-[license-img]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
-[homepage]: https://trivy.dev
-[docs]: https://aquasecurity.github.io/trivy
-[pronúncia]: #como-pronunciar-o-nome-trivy
-[slack]: https://slack.aquasec.com
-[code-of-conduct]: https://github.com/aquasecurity/community/blob/main/CODE_OF_CONDUCT.md
-
-[Instalação]:https://aquasecurity.github.io/trivy/latest/getting-started/installation/
-[Ecossistema]: https://aquasecurity.github.io/trivy/latest/ecosystem/
-[Cobertura de Escaneamento]: https://aquasecurity.github.io/trivy/latest/docs/coverage/
-
-[alpine]: https://ariadne.space/2021/06/08/the-vulnerability-remediation-lifecycle-of-alpine-containers/
-[rego]: https://www.openpolicyagent.org/docs/latest/#rego
-[sigstore]: https://www.sigstore.dev/
-
-[aquasec]: https://aquasec.com
-[oss]: https://www.aquasec.com/products/open-source-projects/
-[discussions]: https://github.com/aquasecurity/trivy/discussions
+O arquivo [trivy.yaml](../.github/workflows/trivy.yaml) usa o exemplo acima.
