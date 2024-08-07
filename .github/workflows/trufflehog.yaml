@@ -19,11 +19,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - name: Checkout code # Ação para clonar o repositório
+      uses: actions/checkout@v4 # Usa a ação para clonar o repositório
       
     - name: Docker Build
       run: docker build -t trufflehog-python:latest -f trufflehog/python/Dockerfile trufflehog/python # Constrói a imagem Docker
 
     - name: Secret Scanning
-      run: docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest docker --image trufflehog-python:latest --only-verified
+      run: docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest docker --image trufflehog-python:latest --only-verified # Executa a verificação de segredos

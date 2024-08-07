@@ -315,25 +315,37 @@ Códigos de Saída:
 
 ### Uso Geral
 
-```
+```yaml
+name: Secrets Check with Trufflehog
 on:
   push:
     branches:
-      - main
+      - main  # Aciona o fluxo de trabalho quando houver push na brach main
+    paths:
+      - 'trufflehog/python'  # Aciona o fluxo de trabalho quando houver push na pasta trufflehog
   pull_request:
+    branches:
+      - main # Aciona o fluxo de trabalho quando houver PR na brach main
+    paths:
+      - 'trufflehog/python'  # Aciona o fluxo de trabalho quando houver PR na pasta trufflehog
+  workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
+    inputs:  # Define entradas para o fluxo de trabalho
+      name:  # Define a entrada "name"
+        description: 'Acionador manual do fluxo de trabalho'  # Descrição da entrada
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout do código
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    - name: Verificação de Segredos
-      uses: trufflesecurity/trufflehog@main
-      with:
-        extra_args: --only-verified
+    - name: Checkout code # Ação para clonar o repositório
+      uses: actions/checkout@v4 # Usa a ação para clonar o repositório
+      
+    - name: Docker Build
+      run: docker build -t trufflehog-python:latest -f trufflehog/python/Dockerfile trufflehog/python # Constrói a imagem Docker
+
+    - name: Secret Scanning
+      run: docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest docker --image trufflehog-python:latest --only-verified # Executa a verificação de segredos
+
 ```
 
 No exemplo de configuração acima, estamos verificando segredos em todas as solicitações de pull e push para o branch `main`. Apenas as alterações de código nos commits referenciados são verificadas. Se você deseja verificar um branch inteiro, consulte a seção "Uso Avançado" abaixo.
@@ -344,7 +356,7 @@ O arquivos [trufflehog.yaml](../.github/workflows/trufflehog.yaml) usa o exemplo
 
 Se você estiver incorporando o TruffleHog em um fluxo de trabalho independente e não estiver executando nenhuma outra ferramenta de CI/CD junto com o TruffleHog, recomendamos o uso da [Clonagem Rasa](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---depthltdepthgt) para acelerar seu fluxo de trabalho. Aqui está um exemplo de como fazer isso:
 
-```
+```yaml
 ...
       - shell: bash
         run: |
@@ -394,7 +406,7 @@ Se você deseja especificar refs específicos `base` e `head`, você pode usar o
 
 #### Uso Avançado: Verificar o branch inteiro
 
-```
+```yaml
 - name: scan-push
         uses: trufflesecurity/trufflehog@main
         with:
