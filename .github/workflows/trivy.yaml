@@ -33,6 +33,3 @@ jobs:
         with:
           scan-type: 'image'
           image-ref: 'trufflehog-python:latest'
-          ignore-unfixed: true
-          # format: 'json'
-          # severity: 'CRITICAL'
