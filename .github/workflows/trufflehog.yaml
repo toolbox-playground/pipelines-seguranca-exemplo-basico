@@ -26,4 +26,4 @@ jobs:
       run: docker build -t trufflehog-python:latest -f trufflehog/python/Dockerfile trufflehog/python # Constrói a imagem Docker
 
     - name: Secret Scanning
-      run: docker run --rm -it -v "$PWD:/pwd" trufflesecurity/trufflehog:latest docker --image trufflehog-python:latest --only-verified
+      run: docker run --rm -v "$PWD:/pwd" trufflesecurity/trufflehog:latest docker --image trufflehog-python:latest --only-verified
