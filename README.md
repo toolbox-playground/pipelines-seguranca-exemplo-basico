@@ -1,4 +1,4 @@
-# Exemplos Básicos de Checkov, Gitleaks, Snyk e Trivy
+# Exemplos Básicos de Checkov, Gitleaks, Snyk, TruffleHog e Trivy
 
 ![Toolbox Playground](img/toolbox-playground.png)
 
