@@ -2,7 +2,7 @@
 
 ![Toolbox Playground](img/toolbox-playground.png)
 
-Este projeto tem como objetivo demonstrar exemplos básicos de configuração de segurança utilizando as ferramentas Checkov, Gitleaks, Snyk e Trivy.
+Este projeto tem como objetivo demonstrar exemplos básicos de configuração de segurança utilizando as ferramentas Checkov, Gitleaks, Snyk, TruffleHog e Trivy.
 
 ### Checkov
 
