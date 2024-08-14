@@ -23,8 +23,14 @@ jobs:
       - name: Checkout do Repositório  # Passo para fazer checkout do repositório
         uses: actions/checkout@v2  # Usa a ação 'actions/checkout' para fazer checkout do repositório
 
-      - name: Instalar o Checkov  # Passo para instalar o Checkov
-        run: pip install checkov  # Instala o Checkov usando o pip
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12 # Define a versão do Python como 3.8
 
-      - name: Executar o Checkov  # Passo para executar o Checkov
-        run: checkov -d checkov/tf  # Executa o Checkov no diretório 'checkov/tf'
+      - name: Test with Checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: checkov/tf # Define o diretório de verificação como 'checkov/tf'
+          framework: terraform # Define o framework como Terraform
