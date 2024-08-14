@@ -116,10 +116,10 @@ jobs:
       - name: Checkout do Repositório  # Passo para fazer checkout do repositório
         uses: actions/checkout@v2  # Usa a ação 'actions/checkout' para fazer checkout do repositório
 
-      - name: Set up Python 3.8
+      - name: Set up Python 3.12
         uses: actions/setup-python@v4
         with:
-          python-version: 3.8 # Define a versão do Python como 3.8
+          python-version: 3.12 # Define a versão do Python como 3.8
 
       - name: Test with Checkov
         id: checkov
