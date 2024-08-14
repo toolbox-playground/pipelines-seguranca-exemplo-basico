@@ -119,7 +119,7 @@ jobs:
       - name: Set up Python 3.12
         uses: actions/setup-python@v4
         with:
-          python-version: 3.12 # Define a versão do Python como 3.8
+          python-version: 3.12 # Define a versão do Python como 3.12
 
       - name: Test with Checkov
         id: checkov
