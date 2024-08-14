@@ -30,7 +30,7 @@ jobs:
 
       - name: Test with Checkov
         id: checkov
-        uses: bridgecrewio/checkov-action@master
+        uses: bridgecrewio/checkov-action@master # Usa a ação 'bridgecrewio/checkov-action' para testar com Checkov
         with:
           directory: checkov/tf # Define o diretório de verificação como 'checkov/tf'
           framework: terraform # Define o framework como Terraform
