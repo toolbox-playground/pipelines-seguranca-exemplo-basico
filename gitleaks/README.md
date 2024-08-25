@@ -4,7 +4,33 @@
 
 O [Gitleaks](https://github.com/gitleaks/gitleaks) é uma ferramenta SAST para detectar e prevenir segredos codificados, como senhas, chaves de API e tokens, em repositórios git. O Gitleaks é uma solução fácil de usar e completa para detectar segredos, passados ou presentes, no seu código.
 
-## Uso do GitLeaks localmente
+## Instalação
+
+### MacOS
+```bash
+brew install gitleaks
+```
+
+### Usando repositório DockerHub (certifique-se de ter o [Docker](https://docs.docker.com/get-docker/) instalado)
+```bash
+docker pull zricethezav/gitleaks:latest
+docker run -v ${path_to_host_folder_to_scan}:/path zricethezav/gitleaks:latest [COMMAND] --source="/path" [OPTIONS]
+```
+
+### Usando repositório ghcr.io (certifique-se de ter o [Docker](https://docs.docker.com/get-docker/) instalado)
+```bash
+docker pull ghcr.io/gitleaks/gitleaks:latest
+docker run -v ${path_to_host_folder_to_scan}:/path ghcr.io/gitleaks/gitleaks:latest [COMMAND] --source="/path" [OPTIONS]
+```
+
+### A partir do código-fonte (certifique-se de ter o [Go](https://go.dev/doc/install) instalado)
+```bash
+git clone https://github.com/gitleaks/gitleaks.git
+cd gitleaks
+make build
+```
+
+## Uso do GitLeaks
 
 Existem dois comandos que você usará para detectar segredos: `detect` e `protect`.
 
@@ -24,9 +50,9 @@ Se você quiser executar apenas regras específicas, você pode fazer isso usand
 
  **NOTA**: O comando `protect` só pode ser usado em repositórios git, executar `protect`em arquivos ou diretórios resultará em uma mensagem de erro.
 
-### Exemplo
+### Exemplo usando Docker com repositório ghcr.io
 
- ```bash
+```bash
 docker pull ghcr.io/gitleaks/gitleaks:latest
 docker run -v "/caminho/para/seu/repositorio":/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path" -v
 ```
@@ -45,6 +71,11 @@ docker run -v "/caminho/para/seu/repositorio":/path ghcr.io/gitleaks/gitleaks:la
 
 Ao executar esse comando, o Docker irá baixar a imagem do Gitleaks, criar um contêiner a partir dessa imagem e executar a detecção de vazamentos de informações confidenciais no diretório do repositório especificado. O resultado da detecção será exibido no terminal.
 
+![Erros](../img/gitleaks_1.png)
+
+![Erros](../img/gitleaks_2.png)
+
+Erros criados para fins didáticos.
 
 ### Uso do GitLeaks no Actions do GitHub
 
@@ -85,10 +116,12 @@ jobs:
 
 ```
 
-Este arquivo de fluxo de trabalho configura executa o GitLeaks sempre que houver um push ou pull request na branch "main" do seu repositório alterando os arquivos presentes na pasta `gitleaks/app`.
+2. Este arquivo de fluxo de trabalho configura executa o GitLeaks sempre que houver um push ou pull request na branch "main" do seu repositório alterando os arquivos presentes na pasta `gitleaks/app`.
 
 3. Faça um commit e push do arquivo de fluxo de trabalho para o seu repositório. Você pode também disparar o flxo de trabalho manualmente.
 
 4. O GitHub Actions executará automaticamente o fluxo de trabalho e o GitLeaks analisará os arquivos, fornecendo relatórios sobre possíveis problemas de segurança.
 
 Com esses passos, você poderá utilizar o GitLeaks no GitHub Actions para verificar a segurança dos seu repositorio.
+
+![Actions](../img/gitleaks_3.png)
