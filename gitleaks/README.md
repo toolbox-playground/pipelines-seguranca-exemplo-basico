@@ -116,7 +116,7 @@ jobs:
 
 ```
 
-2. Este arquivo de fluxo de trabalho configura executa o GitLeaks sempre que houver um push ou pull request na branch "main" do seu repositório alterando os arquivos presentes na pasta `gitleaks/python`. Você pode alterar o local a ser verificado.
+2. Este arquivo de fluxo de trabalho executa o GitLeaks sempre que houver um push ou pull request na branch "main" do seu repositório alterando os arquivos presentes na pasta `gitleaks/python`. Você pode alterar o local a ser verificado.
 
 3. Faça um commit e push do arquivo de fluxo de trabalho para o seu repositório. Você pode também disparar o flxo de trabalho manualmente.
 
