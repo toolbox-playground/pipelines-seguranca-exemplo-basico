@@ -112,7 +112,7 @@ jobs:
           fetch-depth: 0
 
       - name: Executar o GitLeaks com Docker  # Passo para executar o GitLeaks com Docker
-        run: docker run -v ${{ github.workspace }}:/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path" -v # Executa o GitLeaks com Docker no diretório
+        run: docker run -v ${{ github.workspace }}:/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path" -v # Executa o GitLeaks com Docker no diretório de trabalho do repositório em que o GitHub Actions está sendo executado. 
 
 ```
 
