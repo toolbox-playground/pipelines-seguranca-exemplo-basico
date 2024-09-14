@@ -161,4 +161,4 @@ O **secrets.SNYK_TOKEN** é uma variável de ambiente que armazena um token de a
 
 ## Comandos com o Snyk
 
-Link para os comando do CLI Snyk [https://docs.snyk.io/snyk-cli/cli-commands-and-options-summary](https://docs.snyk.io/snyk-cli/cli-commands-and-options-summary).
+Além do comando `container`, o Snyk fornece outros comandos e verificações, como por exemplo o `snyk code test`, que testa quaisquer problemas de segurança conhecidos usando Análise de Código Estático. Segue o link para os comando do CLI Snyk [https://docs.snyk.io/snyk-cli/cli-commands-and-options-summary](https://docs.snyk.io/snyk-cli/cli-commands-and-options-summary).
