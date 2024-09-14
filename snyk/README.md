@@ -8,7 +8,7 @@ O Snyk tem suporte para as seguintes linguagens: Bazel, C, C++, Dart , Flutter, 
 
 ## Usos para o Snyk
 
-Proteja seu código: use o [Snyk Open Source](https://docs.snyk.io/scan-using-snyk/snyk-open-source) para corrigir vulnerabilidades em suas dependências de código aberto e o Snyk Code para corrigir vulnerabilidades em seu código-fonte.
+Proteja seu código: use o [Snyk Open Source](https://docs.snyk.io/scan-using-snyk/snyk-open-source) para corrigir vulnerabilidades em suas dependências de código aberto e o [Snyk Code](https://docs.snyk.io/scan-using-snyk/snyk-code) para corrigir vulnerabilidades em seu código-fonte.
 
 Proteja seus containers: use o [Snyk Container](https://docs.snyk.io/scan-using-snyk/snyk-container) para corrigir vulnerabilidades em imagens de containers e aplicações Kubernetes.
 
@@ -20,7 +20,7 @@ Proteja sua infraestrutura: use o [Snyk Infrastructure as Code (IaC)](https://do
 
 2. **Token**: Após criar a conta, vá até [Account Settings](https://app.snyk.io/account) e copie o **Auth Token** para ser usado abaixo.
 
-3. Certifique-se de ter o Nodejs instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://nodejs.org/pt/download/package-manager/current](https://nodejs.org/pt/download/package-manager/current).
+3. Certifique-se de ter o Nodejs instalado em sua máquina. Você pode baixar e instalar o Nodejs a partir do site oficial: [https://nodejs.org/pt/download/package-manager/current](https://nodejs.org/pt/download/package-manager/current).
 
 4. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
 
@@ -34,13 +34,11 @@ Além disso, o Snyk Container também pode ajudar a corrigir essas vulnerabilida
 
 O Snyk Container é uma ferramenta útil para equipes de desenvolvimento e operações que desejam garantir a segurança de seus contêineres de software. Ele pode ser integrado a pipelines de CI/CD para automatizar a verificação de segurança de imagens de contêineres e garantir que apenas imagens seguras sejam implantadas em produção.
 
-Espero que isso tenha esclarecido o que é o Snyk Container e como ele pode ser útil para garantir a segurança de seus contêineres de software. Se você tiver mais alguma dúvida, fique à vontade para perguntar!
-
 ## Test e Monitor
 
 ### Test
 
-O comando `snyk container test` é usado para testar a segurança de um contêiner Docker em relação a vulnerabilidades conhecidas. O Snyk é uma ferramenta de segurança que verifica se o contêiner possui dependências desatualizadas ou vulneráveis.
+O comando `snyk container test` é usado para testar a segurança de um contêiner Docker em relação a vulnerabilidades conhecidas.
 
 Quando você executa o comando `snyk container test`, o Snyk analisa o contêiner Docker especificado e verifica se há vulnerabilidades conhecidas nas imagens e nas dependências do contêiner. Ele também fornece informações detalhadas sobre as vulnerabilidades encontradas, incluindo o nível de gravidade e as recomendações para corrigi-las.
 
@@ -70,13 +68,15 @@ npm install snyk -g
 snyk auth token
 ```
 
-3. Crie a imagem docker do app python com o seguinte comando:
+3. Acesse a pasta [pipelines-seguranca-exemplo-basico/snyk/python](./python/).
+
+4. Crie a imagem docker do app python com o seguinte comando:
 
 ```bash
 docker build -t snyk-python:latest -f Dockerfile .
 ```
 
-4. Após o build da imagem, rode o comando abaixo para testar a imagem:
+5 Após o build da imagem, rode o comando abaixo para testar a imagem:
 
 ```bash
 snyk container test --docker snyk-python:latest --file=Dockerfile
@@ -84,7 +84,7 @@ snyk container test --docker snyk-python:latest --file=Dockerfile
 ```
 Obs.: Esse comando irá gerar um relatório de falhas encontradas.
 
-5. Para monitorar o código por meio da plataforma Snyk, rode o seguinte comando: 
+6. Para monitorar o código por meio da plataforma Snyk, rode o seguinte comando: 
 
 ```bash
 snyk container monitor --docker snyk-python:latest --file=Dockerfile --project-name=snyk-python
@@ -109,12 +109,12 @@ on:
     branches:
       - main  # Aciona o fluxo de trabalho quando houver push na brach main
     paths:
-      - 'snyk/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/app'
+      - 'snyk/python/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/python'
   pull_request:
     branches:
       - main # Aciona o fluxo de trabalho quando houver PR na brach main
     paths:
-      - 'snyk/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/app'
+      - 'snyk/python/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/python'
   workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
     inputs:  # Define entradas para o fluxo de trabalho
       name:  # Define a entrada "name"

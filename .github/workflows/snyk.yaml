@@ -4,12 +4,12 @@ on:
     branches:
       - main  # Aciona o fluxo de trabalho quando houver push na brach main
     paths:
-      - 'snyk/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/app'
+      - 'snyk/python/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/python'
   pull_request:
     branches:
       - main # Aciona o fluxo de trabalho quando houver PR na brach main
     paths:
-      - 'snyk/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/app'
+      - 'snyk/python/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'snyk/python'
   workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
     inputs:  # Define entradas para o fluxo de trabalho
       name:  # Define a entrada "name"
