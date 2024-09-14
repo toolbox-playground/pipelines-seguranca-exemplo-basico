@@ -14,16 +14,6 @@ Proteja seus containers: use o [Snyk Container](https://docs.snyk.io/scan-using-
 
 Proteja sua infraestrutura: use o [Snyk Infrastructure as Code (IaC)](https://docs.snyk.io/scan-using-snyk/snyk-iac/scan-your-iac-source-code) para corrigir configurações incorretas em templates do Terraform, CloudFormation, Kubernetes e Azure. Use o IaC+ para corrigir configurações incorretas em contas da Amazon Web Services, assinaturas da Microsoft Azure e projetos do Google Cloud.
 
-## Primeiros passos
-
-1. **Crie uma conta**: Acesse o site do [Snyk](https://app.snyk.io/signup) e crie uma conta.
-
-2. **Token**: Após criar a conta, vá até [Account Settings](https://app.snyk.io/account) e copie o **Auth Token** para ser usado abaixo.
-
-3. Certifique-se de ter o Nodejs instalado em sua máquina. Você pode baixar e instalar o Nodejs a partir do site oficial: [https://nodejs.org/pt/download/package-manager/current](https://nodejs.org/pt/download/package-manager/current).
-
-4. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
-
 ## Snyk Container
 
 O Snyk Container é uma ferramenta que ajuda a identificar e corrigir vulnerabilidades de segurança em contêineres de software. Ele é projetado para analisar imagens de contêineres e fornecer informações sobre quaisquer vulnerabilidades conhecidas presentes nessas imagens.
@@ -53,6 +43,16 @@ Use o comando `container monitor` antes de integrar seu código em produção, p
 Se você fizer alterações no seu código, será necessário executar o comando `container monitor` novamente.
 
 Para obter mais informações, consulte [Snyk CLI para segurança de contêineres](https://docs.snyk.io/products/snyk-container/snyk-cli-for-container-security).
+
+## Primeiros passos
+
+1. **Crie uma conta**: Acesse o site do [Snyk](https://app.snyk.io/signup) e crie uma conta.
+
+2. **Token**: Após criar a conta, vá até [Account Settings](https://app.snyk.io/account) e copie o **Auth Token** para ser usado abaixo.
+
+3. Certifique-se de ter o Nodejs instalado em sua máquina. Você pode baixar e instalar o Nodejs a partir do site oficial: [https://nodejs.org/pt/download/package-manager/current](https://nodejs.org/pt/download/package-manager/current).
+
+4. Certifique-se de ter o Docker instalado em sua máquina. Você pode baixar e instalar o Docker a partir do site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
 
 ## Uso do CLI Snyk
 
