@@ -4,12 +4,12 @@ on:
     branches:
       - main
     paths:
-      - 'gitleaks/python/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'gitleaks/app'
+      - 'gitleaks/python/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'gitleaks/python'
   pull_request:
     branches:
       - main
     paths:
-      - 'gitleaks/app/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'gitleaks/app'
+      - 'gitleaks/python/**'  # Aciona o fluxo de trabalho quando houver alterações no diretório 'gitleaks/python'
   workflow_dispatch:  # Aciona manualmente o fluxo de trabalho
     inputs:  # Define entradas para o fluxo de trabalho
       name:  # Define a entrada "name"
@@ -26,4 +26,4 @@ jobs:
           fetch-depth: 0
 
       - name: Executar o GitLeaks com Docker  # Passo para executar o GitLeaks com Docker
-        run: docker run -v ${{ github.workspace }}:/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path" -v # Executa o GitLeaks com Docker no diretório 'gitleaks/app'
+        run: docker run -v ${{ github.workspace }}:/path ghcr.io/gitleaks/gitleaks:latest detect --source="/path" -v # Executa o GitLeaks com Docker no diretório 'gitleaks/python'
