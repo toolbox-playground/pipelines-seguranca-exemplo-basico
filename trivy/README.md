@@ -22,7 +22,7 @@ Scanners (o que o Trivy pode encontrar lá):
 - Informações sensíveis e segredos
 - Licenças de software
 
-Trivy suporta a maioria das linguagens de programação populares, sistemas operacionais e plataformas. Para uma lista completa, consulte a página de [Cobertura de Escaneamento].
+Trivy suporta a maioria das linguagens de programação populares, sistemas operacionais e plataformas. Para uma lista completa, consulte a página de [Cobertura de Escaneamento](https://aquasecurity.github.io/trivy/latest/docs/coverage/).
 
 Para saber mais, acesse a [página inicial do Trivy][homepage] para ver os destaques dos recursos ou o [site de documentação][docs] para obter informações detalhadas.
 
