@@ -24,30 +24,25 @@ Scanners (o que o Trivy pode encontrar lá):
 
 Trivy suporta a maioria das linguagens de programação populares, sistemas operacionais e plataformas. Para uma lista completa, consulte a página de [Cobertura de Escaneamento](https://aquasecurity.github.io/trivy/latest/docs/coverage/).
 
-Para saber mais, acesse a [página inicial do Trivy][homepage] para ver os destaques dos recursos ou o [site de documentação][docs] para obter informações detalhadas.
+Para saber mais, acesse a [página inicial do Trivy](https://trivy.dev/) para ver os destaques dos recursos ou o [site de documentação](https://github.com/aquasecurity/trivy) para obter informações detalhadas.
 
 ## Início rápido
 
 ### Obtenha o Trivy
 
-O Trivy está disponível na maioria dos canais de distribuição comuns. A lista completa de opções de instalação está disponível na página de [Instalação]. Aqui estão alguns exemplos populares:
+O Trivy está disponível na maioria dos canais de distribuição comuns. A lista completa de opções de instalação está disponível na página de [Instalação](https://aquasecurity.github.io/trivy/v0.57/getting-started/installation/). Aqui estão alguns exemplos populares:
 
 - `brew install trivy`
 - `docker run aquasec/trivy`
 - Baixe o binário em <https://github.com/aquasecurity/trivy/releases/latest/>
-- Consulte a [Instalação] para mais opções
+- Consulte a [Instalação](https://aquasecurity.github.io/trivy/v0.57/getting-started/installation/) para mais opções
 
-O Trivy está integrado com muitas plataformas e aplicativos populares. A lista completa de integrações está disponível na página de [Ecossistema]. Aqui estão alguns exemplos populares:
+O Trivy está integrado com muitas plataformas e aplicativos populares. A lista completa de integrações está disponível na página de [Ecossistema](https://aquasecurity.github.io/trivy/v0.57/ecosystem/). Aqui estão alguns exemplos populares:
 
 - [GitHub Actions](https://github.com/aquasecurity/trivy-action)
 - [Operador Kubernetes](https://github.com/aquasecurity/trivy-operator)
 - [Plugin VS Code](https://github.com/aquasecurity/trivy-vscode-extension)
-- Consulte o [Ecossistema] para mais opções
-
-### Builds canary
-Existem builds canary ([Docker Hub](https://hub.docker.com/r/aquasec/trivy/tags?page=1&name=canary), [GitHub](https://github.com/aquasecurity/trivy/pkgs/container/trivy/75776514?tag=canary), [ECR](https://gallery.ecr.aws/aquasecurity/trivy#canary)) e [binários](https://github.com/aquasecurity/trivy/actions/workflows/canary.yaml) gerados a cada push para o branch principal.
-
-Por favor, esteja ciente: as builds canary podem ter bugs críticos, não é recomendado para uso em produção.
+- Consulte o [Ecossistema](https://aquasecurity.github.io/trivy/v0.57/ecosystem/) para mais opções
 
 ### Uso geral
 
@@ -69,9 +64,11 @@ trivy fs --scanners vuln,secret,misconfig myproject/
 trivy k8s --report summary cluster
 ```
 
-## :octocat: GitHub Actions
+## :octocat: Integração com GitHub Actions
 
-### Uso Geral
+O Trivy pode ser facilmente integrado com GitHub Actions para automatizar a verificação de segurança em seu fluxo de trabalho de CI/CD. 
+
+Aqui está um exemplo de configuração:
 
 ```yaml
 name: Secrets Check with Trivy
