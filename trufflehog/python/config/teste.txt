@@ -1,0 +1,31 @@
+# AWS Secret Key
+aws_secret_access_key = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+
+# AWS Access Key ID
+aws_access_key_id = "AKIAIOSFODNN7EXAMPLE"
+
+# GitHub Personal Access Token
+github_token = "ghp_4bJkjdn6SkjdfF3Wsnklsjdf394jldjsfjsdj5"
+
+# Google API Key
+google_api_key = "AIzaSyDx-IlfkX1h2e_EKKE9Hv7EXAMPLEAPIKEY"
+
+# Slack Webhook URL
+slack_webhook_url = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+
+# Database Password
+db_password = "P@ssw0rd123"
+
+# JWT Secret
+jwt_secret = "mySuperSecretKey123!"
+
+# Azure Storage Account Key
+azure_storage_key = "zG9zMBnWf4W5l9+Fw8t7Pz0RfbkW5zzxEzk0B2Peklz0BdFlYvJ0m4ozNHz6PhzE1EXAMPLE=="
+
+# SSH Private Key
+ssh_private_key = """
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEA7KpDq5zgKS3kDpXIlOBY8KHlP1sT6EibFDOi/8mK1V9kzIja
+vL6bbfGV5e7EXAMPLEQ/PpDQ7tPRrLWlm5CwLj/Q==
+-----END RSA PRIVATE KEY-----
+"""
