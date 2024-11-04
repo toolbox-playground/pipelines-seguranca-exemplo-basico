@@ -1,0 +1,6 @@
+{
+    "HogTokenDetector": {
+        "HogID": ["HOGAAIUNNWHAHJJWUQYR"],
+        "HogSecret": ["sD9vzqdSsAOxntjAJ/qZ9sw+8PvEYg0r7D1Hhh0C"],
+    }
+}
