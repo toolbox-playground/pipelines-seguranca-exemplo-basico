@@ -29,4 +29,6 @@ jobs:
       run: mkdir sec && cd sec && curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
 
     - name: Secret Scanning with TruffleHog
-      run: trufflehog filesystem trufflehog/python
+      run: |
+            ls trufflehog/python
+            trufflehog filesystem trufflehog/python
