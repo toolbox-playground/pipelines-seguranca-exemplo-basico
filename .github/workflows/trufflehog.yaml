@@ -31,4 +31,5 @@ jobs:
     - name: Secret Scanning with TruffleHog
       run: |
             ls trufflehog/python
-            trufflehog filesystem trufflehog/python . --verbose
+            trufflehog -h
+            trufflehog filesystem trufflehog/python
