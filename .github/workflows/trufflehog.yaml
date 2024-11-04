@@ -26,7 +26,7 @@ jobs:
       run: docker build -t trufflehog-python:latest -f trufflehog/python/Dockerfile trufflehog/python # Constrói a imagem Docker
 
     - name: Install TruffleHog
-      run: git clone https://github.com/trufflesecurity/trufflehog.git && cd trufflehog; go install
+      run: mkdir sec && cd sec && git clone https://github.com/trufflesecurity/trufflehog.git && go install
 
     - name: Secret Scanning with TruffleHog
       run: trufflehog docker --image trufflesecurity/python --only-verified
