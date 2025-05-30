@@ -27,15 +27,16 @@ A organização exige que o desenvolvedor do sistema de informação, componente
 - Implemente um processo verificável de correção de falhas; e
 - Corrija as falhas identificadas durante os testes/avaliações de segurança.
 
+SA relacionadas:
 - *SA-11(1): Static Code Analysis*
 - *SA-11(2): Threat And Vulnerability Analyses*
 - *SA-11(3): Independent Verification Of Assessment Plans / Evidence*
 
 #### Related Controls
-NIST Special Publication 800-53 Revision 4
-CA-2: Security Assessments
-CM-4: Security Impact Analysis
-SA-3: System Development Life Cycle
-SA-4: Acquisition Process
-SA-5: Information System Documentation
-SI-2: Flaw Remediation
+- NIST Special Publication 800-53 Revision 4
+- CA-2: Security Assessments
+- CM-4: Security Impact Analysis
+- SA-3: System Development Life Cycle
+- SA-4: Acquisition Process
+- SA-5: Information System Documentation
+- SI-2: Flaw Remediation
