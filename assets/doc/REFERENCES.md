@@ -5,5 +5,6 @@
 - https://www.dataguard.com/blog/iso-27001-annex-a.14-system-acquisition-development-and-maintenance/
 - https://www.isms.online/iso-27001/annex-a-14-system-acquisition-development-and-maintenance/
 - https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf
+- https://csf.tools/reference/nist-sp-800-53/r5/
 
 SonarQube - TODO
