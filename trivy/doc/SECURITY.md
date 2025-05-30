@@ -27,9 +27,9 @@ A organização exige que o desenvolvedor do sistema de informação, componente
 - Implemente um processo verificável de correção de falhas; e
 - Corrija as falhas identificadas durante os testes/avaliações de segurança.
 
-*SA-11(1): Static Code Analysis*
-*SA-11(2): Threat And Vulnerability Analyses*
-*SA-11(3): Independent Verification Of Assessment Plans / Evidence*
+- *SA-11(1): Static Code Analysis*
+- *SA-11(2): Threat And Vulnerability Analyses*
+- *SA-11(3): Independent Verification Of Assessment Plans / Evidence*
 
 #### Related Controls
 NIST Special Publication 800-53 Revision 4
