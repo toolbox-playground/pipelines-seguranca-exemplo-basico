@@ -1,6 +1,6 @@
 {
   "name": "pipelines-seguranca-exemplo-basico",
-  "version": "1.2.18",
+  "version": "1.2.19",
   "description": "![Toolbox Playground](img/toolbox-playground.png)",
   "main": "index.js",
   "scripts": {
