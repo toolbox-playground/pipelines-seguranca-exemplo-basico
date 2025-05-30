@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## 1.2.10 (2025-05-30)
+
+
+### Bug Fixes
+
+* removing node_modules ([869b812](https://github.com/toolbox-playground/pipelines-seguranca-exemplo-basico/commit/869b8124ba3ce6235167558936673b2dcbca9a27))
+
 ## 1.2.9 (2025-05-30)
 
 ## 1.2.8 (2025-05-30)
