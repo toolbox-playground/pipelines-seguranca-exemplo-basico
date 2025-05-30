@@ -4,6 +4,6 @@
 - https://owasp.org/www-project-top-ten/2017/A9_2017-Using_Components_with_Known_Vulnerabilities
 - https://www.dataguard.com/blog/iso-27001-annex-a.14-system-acquisition-development-and-maintenance/
 - https://www.isms.online/iso-27001/annex-a-14-system-acquisition-development-and-maintenance/
-
+- https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf
 
 SonarQube - TODO
